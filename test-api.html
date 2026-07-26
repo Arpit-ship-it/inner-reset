@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester — Affirmation App</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.97);
+            padding: 30px;
+            border-radius: 16px;
+            color: #333;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+        }
+        h1 { color: #667eea; text-align: center; font-size: 22px; margin-bottom: 4px; }
+        .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 24px; }
+
+        .url-bar { display: flex; gap: 10px; margin-bottom: 16px; }
+        .url-bar input {
+            flex: 1; padding: 11px 14px; border: 2px solid #ddd;
+            border-radius: 8px; font-size: 14px;
+        }
+        .url-bar input:focus { outline: none; border-color: #667eea; }
+
+        .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        button {
+            padding: 11px 20px; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        button:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        button:active { transform: scale(0.98); }
+
+        .btn-primary  { background: linear-gradient(135deg,#667eea,#764ba2); color:#fff; }
+        .btn-green    { background: linear-gradient(135deg,#10b981,#059669); color:#fff; }
+        .btn-orange   { background: linear-gradient(135deg,#f59e0b,#d97706); color:#fff; }
+        .btn-red      { background: #ef4444; color:#fff; padding: 7px 14px; font-size: 12px; }
+        .btn-purple   { background: linear-gradient(135deg,#8b5cf6,#6d28d9); color:#fff; padding: 7px 14px; font-size: 12px; }
+        .btn-sm-gray  { background: #f3f4f6; color:#555; border:1px solid #ddd; padding:7px 12px; font-size:12px; }
+
+        /* Result box */
+        #result {
+            margin-bottom: 20px; padding: 14px; border-radius: 10px;
+            white-space: pre-wrap; word-wrap: break-word;
+            font-family: 'Courier New', monospace; font-size: 13px;
+            max-height: 200px; overflow-y: auto; display: none;
+        }
+        .success { background:#d1fae5; color:#065f46; border:2px solid #10b981; }
+        .error   { background:#fee2e2; color:#991b1b; border:2px solid #ef4444; }
+        .info    { background:#dbeafe; color:#1e40af; border:2px solid #3b82f6; }
+        .loading { background:#fef9c3; color:#92400e; border:2px solid #f59e0b; text-align:center; }
+
+        /* Users table section */
+        #usersSection { display: none; }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 14px; padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .section-header h2 { font-size: 16px; color: #374151; }
+        .user-count {
+            background: #667eea; color: white;
+            font-size: 12px; font-weight: 700;
+            padding: 3px 10px; border-radius: 999px;
+        }
+
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead tr { background: linear-gradient(135deg,#667eea,#764ba2); color: white; }
+        th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+        tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.15s; }
+        tbody tr:hover { background: #f9fafb; }
+        td { padding: 10px 14px; vertical-align: middle; }
+
+        .badge {
+            display: inline-block; padding: 3px 10px;
+            border-radius: 999px; font-size: 11px; font-weight: 700;
+        }
+        .badge-active   { background: #d1fae5; color: #065f46; }
+        .badge-inactive { background: #fee2e2; color: #991b1b; }
+
+        .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .toast {
+            position: fixed; bottom: 28px; right: 28px;
+            padding: 12px 20px; border-radius: 10px;
+            font-size: 13px; font-weight: 600; color: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s ease; z-index: 9999;
+        }
+        .toast-success { background: #059669; }
+        .toast-error   { background: #dc2626; }
+        @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+        .empty-state { text-align:center; padding: 40px 0; color: #9ca3af; font-size: 14px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🔍 API Connection Tester</h1>
+    <p class="subtitle">Test backend, fetch users, send quotes, remove entries</p>
+
+    <!-- URL Bar -->
+    <div class="url-bar">
+        <input type="text" id="apiUrl" placeholder="http://localhost:5000" value="http://localhost:5000" />
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="btn-row">
+        <button class="btn-primary" onclick="testConnection()">🚀 Test Connection</button>
+        <button class="btn-green"   onclick="fetchUsers()">👥 Fetch All Users</button>
+        <button class="btn-orange"  onclick="refreshUsers()" id="refreshBtn" style="display:none">🔄 Refresh Users</button>
+    </div>
+
+    <!-- Result Output -->
+    <div id="result"></div>
+
+    <!-- Users Table -->
+    <div id="usersSection">
+        <div class="section-header">
+            <h2>📋 Registered Users</h2>
+            <span class="user-count" id="userCount">0</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>WhatsApp</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Registered</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state" style="display:none">
+                No users registered yet.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const resultDiv    = document.getElementById('result');
+    const apiUrlInput  = document.getElementById('apiUrl');
+
+    // ── Persist URL ─────────────────────────────────────
+    window.addEventListener('load', () => {
+        const saved = localStorage.getItem('apiUrl');
+        if (saved) apiUrlInput.value = saved;
+    });
+    apiUrlInput.addEventListener('change', () => {
+        localStorage.setItem('apiUrl', apiUrlInput.value.trim());
+    });
+
+    function getApiUrl() { return apiUrlInput.value.trim().replace(/\/$/, ''); }
+
+    // ── Result box ───────────────────────────────────────
+    function showResult(msg, type = 'info') {
+        resultDiv.textContent = msg;
+        resultDiv.className   = type;
+        resultDiv.style.display = 'block';
+    }
+
+    // ── Toast ────────────────────────────────────────────
+    function showToast(msg, type = 'success') {
+        const t = document.createElement('div');
+        t.className = `toast toast-${type}`;
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 3000);
+    }
+
+    // ── Test Connection ──────────────────────────────────
+    async function testConnection() {
+        const url = getApiUrl();
+        if (!url) { showResult('❌ URL enter karo', 'error'); return; }
+        showResult('⏳ Testing connection...', 'loading');
+        try {
+            const res  = await fetch(url);
+            const text = await res.text();
+            showResult(`✅ Connection Successful!\n\nStatus: ${res.status}\nResponse: ${text}`, 'success');
+        } catch (err) {
+            showResult(`❌ Connection Failed!\n\nError: ${err.message}\n\nCheck:\n• Backend server running hai?\n• URL sahi hai?\n• CORS configured hai?`, 'error');
+        }
+    }
+
+    // ── Fetch / Render Users ─────────────────────────────
+    async function fetchUsers() {
+        const url = getApiUrl();
+        if (!url) { showResult('❌ URL enter karo', 'error'); return; }
+        showResult('⏳ Fetching users...', 'loading');
+        try {
+            const res   = await fetch(`${url}/api/auth/users`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+            const users = await res.json();
+            renderUsers(users);
+            showResult(`✅ ${users.length} user(s) fetched successfully!`, 'success');
+        } catch (err) {
+            showResult(`❌ Users fetch failed!\n\nError: ${err.message}`, 'error');
+        }
+    }
+
+    async function refreshUsers() {
+        const url = getApiUrl();
+        try {
+            const res   = await fetch(`${url}/api/auth/users`);
+            const users = await res.json();
+            renderUsers(users);
+            showToast(`✅ ${users.length} users refreshed`);
+        } catch (err) {
+            showToast('❌ Refresh failed', 'error');
+        }
+    }
+
+    function renderUsers(users) {
+        const tbody      = document.getElementById('usersTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const section    = document.getElementById('usersSection');
+        const refreshBtn = document.getElementById('refreshBtn');
+
+        section.style.display    = 'block';
+        refreshBtn.style.display = 'inline-block';
+        document.getElementById('userCount').textContent = users.length;
+
+        if (users.length === 0) {
+            tbody.innerHTML      = '';
+            emptyState.style.display = 'block';
+            return;
+        }
+        emptyState.style.display = 'none';
+
+        tbody.innerHTML = users.map((user, i) => `
+            <tr id="row-${user.id}">
+                <td style="color:#9ca3af;font-weight:600">${i + 1}</td>
+                <td style="font-weight:700;color:#374151">${escHtml(user.name)}</td>
+                <td style="color:#7c3aed;font-family:monospace">${escHtml(user.whatsapp_number)}</td>
+                <td style="color:#6b7280;font-size:12px">${escHtml(user.email)}</td>
+                <td>
+                    <span class="badge ${user.status === 'active' ? 'badge-active' : 'badge-inactive'}">
+                        ${user.status === 'active' ? '✓ Active' : '⏸ Inactive'}
+                    </span>
+                </td>
+                <td style="color:#9ca3af;font-size:12px">${new Date(user.createdAt).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'})}</td>
+                <td>
+                    <div class="actions">
+                        <button class="btn-purple" onclick="sendQuote(${user.id}, '${escAttr(user.whatsapp_number)}', '${escAttr(user.name)}')">
+                            ✉️ Send Quote
+                        </button>
+                        <button class="btn-red" onclick="removeUser(${user.id}, '${escAttr(user.name)}')">
+                            🗑️ Remove
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Send Quote ───────────────────────────────────────
+    async function sendQuote(userId, whatsappNumber, name) {
+        const url = getApiUrl();
+        const btn = event.currentTarget;
+        btn.disabled  = true;
+        btn.textContent = '⏳ Sending...';
+
+        try {
+            const res  = await fetch(`${url}/api/auth/send-manual-message`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ whatsapp_number: whatsappNumber, name })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                showToast(`✅ Quote sent to ${name}!`);
+            } else {
+                showToast(`❌ ${data.message || 'Send failed'}`, 'error');
+            }
+        } catch (err) {
+            showToast(`❌ Error: ${err.message}`, 'error');
+        } finally {
+            btn.disabled    = false;
+            btn.textContent = '✉️ Send Quote';
+        }
+    }
+
+    // ── Remove User ──────────────────────────────────────
+    async function removeUser(userId, name) {
+        if (!confirm(`⚠️ "${name}" ko permanently delete karna chahte ho?\n\nYeh action undo nahi ho sakta!`)) return;
+
+        const url = getApiUrl();
+        try {
+            const res  = await fetch(`${url}/api/auth/users/${userId}`, { method: 'DELETE' });
+            const data = await res.json();
+            if (res.ok) {
+                // Row ko table se smoothly hatao
+                const row = document.getElementById(`row-${userId}`);
+                if (row) {
+                    row.style.transition = 'opacity 0.3s';
+                    row.style.opacity    = '0';
+                    setTimeout(() => { row.remove(); updateUserCount(); }, 300);
+                }
+                showToast(`🗑️ ${name} removed successfully!`);
+                showResult(`✅ User "${name}" (ID: ${userId}) deleted from database.`, 'success');
+            } else {
+                showToast(`❌ ${data.message || 'Delete failed'}`, 'error');
+            }
+        } catch (err) {
+            showToast(`❌ Error: ${err.message}`, 'error');
+        }
+    }
+
+    function updateUserCount() {
+        const rows = document.querySelectorAll('#usersTableBody tr');
+        document.getElementById('userCount').textContent = rows.length;
+        if (rows.length === 0) {
+            document.getElementById('emptyState').style.display = 'block';
+        }
+    }
+
+    // ── XSS helpers ──────────────────────────────────────
+    function escHtml(str) {
+        return String(str ?? '')
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(str) {
+        return String(str ?? '').replace(/'/g,"\\'").replace(/"/g,'\\"');
+    }
+</script>
+</body>
+</html>
