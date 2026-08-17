@@ -1,12 +1,70 @@
 const express = require('express');
 const router = express.Router();
+const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Subscription = require('../models/Subscription');
 const UserMood = require('../models/UserMood'); // AI Smart Sentiment Tracker Model Import
 const UserJourney = require('../models/UserJourney');
-// ✅ Named export: whatsappClient + sendWAMessage wrapper import
-const { whatsappClient, sendWAMessage } = require('../config/whatsapp');
+// ✅ Dynamic WhatsApp config import (Production vs Dev)
+const waModule = process.env.NODE_ENV === 'production'
+    ? require('../config/whatsapp.production')
+    : require('../config/whatsapp');
+const { sendWAMessage, whatsappClient } = waModule;
+global.tempOtpStore = global.tempOtpStore || {}; let tempOtpStore = global.tempOtpStore;
+
+const sanitizeNumber = (num) => {
+    let clean = String(num || '').replace(/[^\d]/g, '');
+    if (clean.length === 10) clean = `91${clean}`;
+    return clean;
+};
+
+// 🔐 SEND OTP ENDPOINT
+router.post('/send-otp', async (req, res) => {
+    const { whatsapp_number } = req.body;
+    if (!whatsapp_number) return res.status(400).json({ error: 'WhatsApp number is required' });
+
+    const cleanPhone = sanitizeNumber(whatsapp_number);
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    tempOtpStore[cleanPhone] = otp;
+    tempOtpStore[whatsapp_number] = otp;
+    console.log(`✅ [OTP Active] OTP [${otp}] generated and stored for ${cleanPhone} (raw: ${whatsapp_number})`);
+
+    // Dispatch WhatsApp message in background without blocking HTTP response
+    sendWAMessage(
+        cleanPhone,
+        `🔐 *Affirmation App Verification*\n\nYour security OTP code is: *${otp}*.\n\nPlease enter this code on the registration page to proceed with the payment.`
+    ).then(res => {
+        console.log(`✅ [Async WA Transmission Result] Delivery to ${cleanPhone}: ${res}`);
+    }).catch(waErr => {
+        console.error('⚠️ [WA Transmission Warning]:', waErr.message || waErr);
+    });
+    
+    return res.json({ success: true, message: 'OTP sent successfully on WhatsApp!', otp: otp });
+});
+
+// 🔐 VERIFY OTP ENDPOINT
+router.post('/verify-otp', (req, res) => {
+    const { whatsapp_number, otp } = req.body;
+    if (!whatsapp_number || !otp) return res.status(400).json({ error: 'WhatsApp number and OTP are required' });
+
+    const cleanPhone = sanitizeNumber(whatsapp_number);
+    const providedOtp = String(otp).trim();
+
+    // Accept matching stored OTP, or '123456' test fallback
+    if (providedOtp === '123456' || (global.tempOtpStore && global.tempOtpStore[cleanPhone] === providedOtp)) {
+        if (global.tempOtpStore) {
+            delete global.tempOtpStore[cleanPhone];
+            delete global.tempOtpStore[whatsapp_number];
+        }
+        console.log(`✅ [OTP Verified] OTP [${providedOtp}] matched for ${cleanPhone}`);
+        return res.json({ success: true, message: 'OTP verified successfully!' });
+    }
+
+    console.warn(`❌ [OTP Failed] Invalid OTP [${providedOtp}] attempt for ${cleanPhone} (raw: ${whatsapp_number})`);
+    return res.status(400).json({ error: 'Invalid or expired OTP code. Please check your WhatsApp and try again.' });
+});
 
 // 📝 1. ORIGINAL PREMIUM USER REGISTRATION ENDPOINT
 router.post('/register', async (req, res) => {
@@ -33,21 +91,9 @@ router.post('/register', async (req, res) => {
             cleanNumber = `91${cleanNumber}`;
         }
         
-        // WHATSAPP OFFICIAL ID PRE-RESOLVER
+        // WHATSAPP OFFICIAL ID RESOLVER
         let finalWhatsappNumber = cleanNumber;
         let formattedNumber = `${cleanNumber}@c.us`;
-
-        try {
-            console.log(`🔍 Resolving real WhatsApp identifier for phone: ${cleanNumber}`);
-            const numberId = await whatsappClient.getNumberId(cleanNumber);
-            if (numberId) {
-                finalWhatsappNumber = numberId.user; 
-                formattedNumber = numberId._serialized; 
-                console.log(`🎯 [LID Pre-Resolver] Phone mapped successfully to ID: ${finalWhatsappNumber}`);
-            }
-        } catch (idErr) {
-            console.error('⚠️ Number ID resolution failed, falling back to standard string format:', idErr.message);
-        }
 
         const newUser = await User.create({
             name,
@@ -139,21 +185,7 @@ router.post('/register-temporary', async (req, res) => {
     try {
         const { name, email, phone, companionName, userAddressName } = req.body;
 
-        if (!name || !email || !phone) {
-            return res.status(400).json({ success: false, message: 'Bhai, Name, Email aur Phone number zaroori hai!' });
-        }
-
-        const existingUser = await User.findOne({ where: { email } });
-        if (existingUser) {
-            return res.status(400).json({ success: false, message: 'Ye email toh pehle se registered hai!' });
-        }
-
-        // Dummy hashed placeholder for trial accounts to accommodate password table schema rules safely
-        const dummySalt = await bcrypt.genSalt(10);
-        const dummyPassword = await bcrypt.hash("TrialAccountBypass2026", dummySalt);
-
-        // Sanitize incoming phone sequence
-        let cleanNumber = phone.replace(/[^\d]/g, ''); 
+        let cleanNumber = String(phone || '').replace(/[^\d]/g, ''); 
         if (cleanNumber.length === 10) {
             cleanNumber = `91${cleanNumber}`;
         }
@@ -161,25 +193,77 @@ router.post('/register-temporary', async (req, res) => {
         let finalWhatsappNumber = cleanNumber;
         let formattedNumber = `${cleanNumber}@c.us`;
 
-        try {
-            console.log(`🔍 Resolving real WhatsApp identifier for Free Trial phone: ${cleanNumber}`);
-            const numberId = await whatsappClient.getNumberId(cleanNumber);
-            if (numberId) {
-                finalWhatsappNumber = numberId.user; 
-                formattedNumber = numberId._serialized; 
-                console.log(`🎯 [LID Pre-Resolver] Trial mapped successfully to ID: ${finalWhatsappNumber}`);
+        const Op = require('sequelize').Op;
+        const existingUser = await User.findOne({ 
+            where: { 
+                [Op.or]: [
+                    { email }, 
+                    { whatsapp_number: finalWhatsappNumber }
+                ] 
+            } 
+        });
+
+        if (existingUser) {
+            existingUser.name = name;
+            existingUser.status = 'active';
+            await existingUser.save();
+
+            let journey = await UserJourney.findOne({ where: { whatsapp_number: finalWhatsappNumber } });
+            if (journey) {
+                journey.user_address_name = userAddressName || name;
+                journey.companion_name = companionName || 'Care Buddy';
+                await journey.save();
+            } else {
+                try {
+                    await UserJourney.create({
+                        whatsapp_number: finalWhatsappNumber,
+                        user_address_name: userAddressName || name,
+                        companion_name: companionName || 'Care Buddy'
+                    });
+                } catch (jErr) {}
             }
-        } catch (idErr) {
-            console.error('⚠️ Free Trial Identifier mapping lookup failed:', idErr.message);
+
+            const trialWelcomeMessage = `🌿 Welcome to Inner Reset\n` +
+            `Daily reminders for a better you.\n\n` +
+            `Dear ${userAddressName || name},\n\n` +
+            `Welcome to Inner Reset. 💚\n\n` +
+            `Thank you for being here.\n\n` +
+            `From today, you'll receive gentle reminders throughout the day to help you pause, reflect, and reconnect with yourself.\n\n` +
+            `Here's what you can look forward to:\n\n` +
+            `🌅 Morning Check-in – Choose how you'd like your day to feel.\n\n` +
+            `✨ Morning Affirmation – A positive affirmation inspired by your choice.\n\n` +
+            `🌞 Afternoon Reminder – A little encouragement to keep you going.\n\n` +
+            `💛 Mindful Pause – A simple thought to help you slow down and reset.\n\n` +
+            `🌙 Evening Reflection – A calming message to end your day with peace and gratitude.\n\n` +
+            `There's nothing you need to do perfectly.\n\n` +
+            `Simply read the messages, pause for a moment, and allow them to become part of your day.\n\n` +
+            `Small reminders, repeated consistently, have the power to create lasting change.\n\n` +
+            `We're happy to be part of your journey.\n\n` +
+            `With warmth,\n\n` +
+            `Team Inner Reset\n` +
+            `Daily reminders for a better you.`;
+
+            try {
+                await sendWAMessage(formattedNumber, trialWelcomeMessage);
+            } catch (waErr) {}
+
+            return res.status(200).json({
+                success: true,
+                message: 'Welcome back! Preferences updated and onboarding message sent.',
+                user: existingUser
+            });
         }
 
-        // Insert record directly to User model parameters — status: inactive (payment pending)
+        // Create new user if not existing
+        const dummySalt = await bcrypt.genSalt(10);
+        const dummyPassword = await bcrypt.hash("TrialAccountBypass2026", dummySalt);
+
         const newTrialUser = await User.create({
             name,
             email,
             password: dummyPassword,
             whatsapp_number: finalWhatsappNumber,
-            status: 'inactive',   // ✅ Payment confirm hone tak inactive rahega
+            status: 'active',
             utr_number: null
         });
 
@@ -233,8 +317,15 @@ router.post('/register-temporary', async (req, res) => {
         `Team Inner Reset\n` +
         `Daily reminders for a better you.`;
 
-        // ✅ Welcome message confirm-payment route se jayega — abhi nahi (status inactive hai)
-        console.log(`✅ [Register Pending] "${name}" saved with status:inactive — awaiting payment QR. ID: ${newTrialUser.id}`);
+        // ✅ Dispatch welcome message on WhatsApp immediately
+        try {
+            console.log(`🚀 [WA Trial Dispatch] Sending welcome message to: ${formattedNumber}`);
+            await sendWAMessage(formattedNumber, trialWelcomeMessage);
+        } catch (waWelcomeErr) {
+            console.error('⚠️ [WA Welcome Delivery Warning]:', waWelcomeErr.message);
+        }
+
+        console.log(`✅ [Register Complete] "${name}" saved and onboarding message dispatched. ID: ${newTrialUser.id}`);
 
         return res.status(201).json({
             success: true,
@@ -249,7 +340,7 @@ router.post('/register-temporary', async (req, res) => {
 
     } catch (error) {
         console.error('❌ [Register-Temporary Error]:', error);
-        return res.status(500).json({ success: false, message: 'Server error. Logs check karo.' });
+        return res.status(500).json({ success: false, message: 'Server error.', error: error.message, stack: error.stack });
     }
 });
 
@@ -264,56 +355,31 @@ router.get('/users', async (req, res) => {
     }
 });
 
-// ✉️ 4. MANUAL WHATSAPP MESSAGE BHEJNE KE LIYE
+// ✉️ 4. MANUAL WHATSAPP MESSAGE BHEJNE KE LIYE (Short Test Message)
 router.post('/send-manual-message', async (req, res) => {
     try {
-        const { whatsapp_number, name } = req.body;
-        if (!whatsapp_number) return res.status(400).json({ message: 'Number missing hai!' });
+        const { whatsapp_number, message } = req.body;
+        if (!whatsapp_number) return res.status(400).json({ success: false, message: 'Number missing hai!' });
 
-        const quotes = [
-            "Your only limit is your mind. Keep pushing forward! 💪",
-            "Hard work catches up with talent when talent doesn't work hard. 🚀",
-            "Today is a new opportunity to build the life you want. ✨",
-            "Small steps every day lead to big results over time. 🏆",
-            "Don't wait for opportunity. Create it! 😎"
-        ];
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        let cleanNumber = String(whatsapp_number).replace(/[^\d]/g, '');
+        if (cleanNumber.length === 10) cleanNumber = `91${cleanNumber}`;
+        const targetDestination = `${cleanNumber}@c.us`;
 
-        let cleanNumber = whatsapp_number.replace(/[^\d]/g, '');
-        let targetDestination;
+        const shortText = message || "🌿 Inner Reset Test: WhatsApp integration active! ✅";
 
-        if (cleanNumber.length > 13) {
-            targetDestination = `${cleanNumber}@lid`;
-            console.log(`🎯 [LID Route Detected] Formatting token explicitly as: ${targetDestination}`);
+        console.log(`🚀 [WA Manual Dispatch] Transmitting short message to: ${targetDestination}`);
+        const sent = await sendWAMessage(targetDestination, shortText);
+
+        if (sent) {
+            console.log(`✅ [WA Manual Sent] Delivered to ${targetDestination}`);
+            return res.status(200).json({ success: true, message: `Short message delivered to ${cleanNumber}! ✅` });
         } else {
-            if (cleanNumber.length === 10) {
-                cleanNumber = `91${cleanNumber}`;
-            }
-            targetDestination = `${cleanNumber}@c.us`;
-            
-            try {
-                console.log(`🔍 Manual Route: Resolving network identifier for phone: ${cleanNumber}`);
-                const numberId = await whatsappClient.getNumberId(cleanNumber);
-                if (numberId) {
-                    targetDestination = numberId._serialized; 
-                }
-            } catch (idErr) {
-                console.error('⚠️ LID network lookup failed, using standard string fallback:', idErr.message);
-            }
+            console.warn(`❌ [WA Manual Failed] Delivery failed to ${targetDestination}`);
+            return res.status(500).json({ success: false, message: `Delivery failed to ${cleanNumber}. Check server logs.` });
         }
-
-        console.log(`🚀 [WA Manual Dispatch] Sending quote to: ${targetDestination}`);
-        
-        const sent = await sendWAMessage(targetDestination, `Hey ${name || 'User'}! ✨\n\n*An official message from The Affirmation Initiative:*\n\n"${randomQuote}"\n\nKeep grinding! 🔥`);
-        if (!sent) {
-            return res.status(503).json({ message: 'WhatsApp client ready nahi hai. Baad mein try karo.' });
-        }
-
-        console.log(`✅ [WA Manual Sent] Message delivered successfully to ${name}`);
-        res.status(200).json({ message: `Message successfully sent to ${name}! ✅` });
     } catch (error) {
-        console.error('Manual Message Endpoint Major Failure:', error.message);
-        res.status(500).json({ message: 'WhatsApp message fail ho gaya! Internal identifier mapping crash.' });
+        console.error('❌ [Manual Message Endpoint Error]:', error.message);
+        return res.status(500).json({ success: false, error: error.message });
     }
 });
 

@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const User = require('../models/User');
 const MessageLog = require('../models/MessageLog');
 const UserMood = require('../models/UserMood');
-const { processUserMessage } = require('../services/aiEngine');
+const { processUserMessage, generateOptionContent } = require('../services/aiEngine');
 const UserJourney = require('../models/UserJourney');
 const morningJourney = require('../data/morningJourney');
 
@@ -17,11 +17,6 @@ const initializeChatbot = (whatsappClient) => {
             const cleanNumber = msg.from.split('@')[0]; 
 
             console.log(`📩 [Bot Triggered] Incoming Message from: ${cleanNumber} | Text: "${msg.body}"`);
-
-            // ✅ FIX: Database me multiple formats try karo kyunki stored number
-            // kabhi 91XXXXXXXXXX hota hai, kabhi LID (15+ digit), kabhi sirf 10-digit.
-            // msg.from ka format hota hai: "91XXXXXXXXXX@c.us" ya "XXXXXXXXXXXXXXX@lid"
-            // cleanNumber = msg.from se @ ke pehle ka part
 
             // Build possible stored variants to match against DB
             const searchVariants = [cleanNumber]; // e.g. "919876543210" or LID
@@ -46,7 +41,7 @@ const initializeChatbot = (whatsappClient) => {
                 console.warn(`⚠️ [Chatbot Contact Resolve Warning]: Failed to fetch contact info: ${contactErr.message}`);
             }
 
-            // Expanded lookup variant rules for each variant (handles prefixes and LIDs gracefully)
+            // Expanded lookup variant rules for each variant
             const extraVariants = [];
             for (const variant of searchVariants) {
                 if (variant.length === 12 && variant.startsWith('91')) {
@@ -68,18 +63,17 @@ const initializeChatbot = (whatsappClient) => {
 
             const user = await User.findOne({ 
                 where: { 
-                    whatsapp_number: { [Op.in]: searchVariants },
-                    status: 'active' 
+                    whatsapp_number: { [Op.in]: searchVariants }
                 } 
             });
             
             if (!user) {
-                console.log(`⚠️ [Bot Ignored] No active user found for: ${cleanNumber} (tried variants: ${searchVariants.join(', ')})`);
+                console.log(`⚠️ [Bot Ignored] No registered user found for: ${cleanNumber} (tried variants: ${searchVariants.join(', ')})`);
                 return;
             }
 
             const userMessage = msg.body.trim().toLowerCase();
-            console.log("🚀 [Mental Health Engine] Filtering request through Smart Routing Matrix...");
+            console.log("🚀 [Mental Health Engine] Processing request through AI & Menu Matrix...");
 
             // 1. Current user message ko database me save karo
             await MessageLog.create({
@@ -89,7 +83,7 @@ const initializeChatbot = (whatsappClient) => {
             });
 
             // =========================================================================
-            // 🌅 USER JOURNEY INTERACTION HANDLER (Morning & Afternoon Check-ins)
+            // 🌅 USER JOURNEY INTERACTION HANDLER (Morning Check-ins)
             // =========================================================================
             let journey = await UserJourney.findOne({ where: { whatsapp_number: user.whatsapp_number } });
             if (!journey) {
@@ -101,9 +95,8 @@ const initializeChatbot = (whatsappClient) => {
             }
 
             const name = journey.user_address_name || user.name;
-            const companion = journey.companion_name || 'Care Buddy';
 
-            // 1️⃣ Morning Choice Response Capture
+            // Morning Choice Response Capture
             if (journey.morning_choice_today === 'PENDING') {
                 const dayData = morningJourney[journey.current_day - 1];
                 if (dayData) {
@@ -149,8 +142,6 @@ const initializeChatbot = (whatsappClient) => {
                 }
             }
 
-            // Afternoon check-in capture removed
-
             // 2. FETCH MESSAGE COUNTER FOR THE LAST 1 HOUR ONLY
             const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); 
             const totalUserMessages = await MessageLog.count({
@@ -161,11 +152,14 @@ const initializeChatbot = (whatsappClient) => {
                 }
             });
 
-            console.log(`📊 [Rolling Session Log] Messages by ${user.name} in last 1 hour: ${totalUserMessages}`);
+            console.log(`📊 [Session Log] Messages by ${user.name} in last 1 hour: ${totalUserMessages}`);
 
             // 📝 KEYWORD GROUPS FOR CRITICAL ESCALATION
             const severeKeywords = ['hallucination', 'hallucinations', 'seeing things', 'hearing voices', 'voices in my head', 'suicide', 'kill myself', 'hurt myself', 'end my life', 'end it all', 'die', 'self harm'];
             const matchesAny = (arr) => arr.some(keyword => userMessage.includes(keyword));
+
+            // Strict Option Matching list (only matches when user enters choice command)
+            const isOptionSelection = ['1', '2', '3', '4', '5', 'stress', 'sad', 'motivation', 'bored', 'happy'].includes(userMessage);
 
             let aiReply = "";
             let isConditionSevere = false;
@@ -180,9 +174,9 @@ const initializeChatbot = (whatsappClient) => {
                           `I strongly urge you to consult an expert directly who can guide you with proper care:\n` +
                           `👉 *Book a Session with Shaifaly Sangal:* https://shaifalysangal.com/#contact`;
             } 
-            else if (['hi', 'hello', 'hey', 'menu', 'help'].includes(userMessage)) {
+            else if (['hi', 'hello', 'hey', 'menu', 'help', 'start'].includes(userMessage)) {
                 isGreeting = true; 
-                aiReply = `Hello ${user.name}! Welcome back to your mental safe space. ✨\n\n` +
+                aiReply = `Hello ${name}! Welcome back to your mental safe space. ✨\n\n` +
                           `*How are you feeling right now?* 🤔\n` +
                           `Reply with a *NUMBER* or *WORD* to get instant custom tips and a powerful quote:\n\n` +
                           `1️⃣ *Stressed / Anxious* (or reply "stress")\n` +
@@ -190,35 +184,21 @@ const initializeChatbot = (whatsappClient) => {
                           `3️⃣ *Demotivated / Tired* (or reply "motivation")\n` +
                           `4️⃣ *Bored / Distracted* (or reply "bored")\n` +
                           `5️⃣ *Happy / Peaceful* (or reply "happy")\n\n` +
-                          `Drop your choice below and let's check in on you! 👇`;
+                          `Drop your choice below, or tell me anything on your mind (like relationship advice, coping tips, or how you feel)! 👇`;
             }
-            else if (['1', 'stress'].includes(userMessage) || userMessage.includes('anxious') || userMessage.includes('panic')) {
-                aiReply = `💡 *Option 1 Selected: Managing Stress & Anxiety* 😰\n\n` +
-                          `💬 *Quote:* "You don't have to control your thoughts. You just have to stop letting them control you."\n\n` +
-                          `🛠️ *Quick Tips:* Box Breathing, Brain Dump, Micro-Steps.`;
-            }
-            else if (['2', 'sad'].includes(userMessage) || userMessage.includes('low') || userMessage.includes('depressed')) {
-                aiReply = `💡 *Option 2 Selected: Navigating Sadness* 😔\n\n` +
-                          `💬 *Quote:* "The emotion that can break your heart is sometimes the very one that heals it."\n\n` +
-                          `🛠️ *Quick Tips:* Change environment, Hydrate, Self-Compassion.`;
-            }
-            else if (['3', 'motivation'].includes(userMessage) || userMessage.includes('tired') || userMessage.includes('lazy')) {
-                aiReply = `💡 *Option 3 Selected: Recharging Motivation* 🔋\n\n` +
-                          `💬 *Quote:* "Amateurs sit and wait for inspiration, the rest of us just get up and go to work."\n\n` +
-                          `🛠️ *Quick Tips:* 5-Minute Rule, Unplug Early, Remember the Root.`;
-            }
-            else if (['4', 'bored'].includes(userMessage) || userMessage.includes('distracted') || userMessage.includes('focus')) {
-                aiReply = `💡 *Option 4 Selected: Breaking Boredom* 🥱\n\n` +
-                          `💬 *Quote:* "Boredom is the feeling that everything is a waste of time."\n\n` +
-                          `🛠️ *Quick Tips:* Dopamine Detox, Gamify Tasks, Physical Shock.`;
-            }
-            else if (['5', 'happy'].includes(userMessage) || userMessage.includes('peaceful') || userMessage.includes('great')) {
-                aiReply = `💡 *Option 5 Selected: Embracing Happiness* 🌱\n\n` +
-                          `💬 *Quote:* "Happiness is not something ready-made. It comes from your own actions."\n\n` +
-                          `🛠️ *Tips:* Anchor the moment, Express Gratitude, Pay It Forward.`;
+            else if (isOptionSelection) {
+                // Fetch AI-backed quote and tips for the selected option
+                const optionContent = await generateOptionContent(userMessage, name);
+                if (optionContent) {
+                    aiReply = optionContent;
+                } else {
+                    const aiResult = await processUserMessage(msg.body, name);
+                    aiReply = aiResult.replyMessage;
+                }
             }
             else {
-                console.log(`🧠 [AI Core] Routing to Gemini Flash Live Pipeline...`);
+                // ALL OTHER MESSAGES (e.g. "I had a breakup and now i want some relationship advice", etc.) GO DIRECTLY TO AI!
+                console.log(`🧠 [AI Core] Routing open-ended message from ${name} directly to Gemini AI Engine...`);
                 try {
                     const aiResult = await processUserMessage(msg.body, name);
                     aiReply = aiResult.replyMessage;
@@ -239,7 +219,7 @@ const initializeChatbot = (whatsappClient) => {
                     }
                 } catch (aiErr) {
                     console.error("❌ AI Engine Pipeline Failure:", aiErr);
-                    aiReply = "I am listening. Tell me more about what's on your mind?";
+                    aiReply = `I am listening, ${name}. Tell me more about what's on your mind?`;
                 }
             }
 

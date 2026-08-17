@@ -15,5 +15,5 @@ COPY . .
 ENV PORT=5000
 EXPOSE 5000
 
-# 🔥 Server aur Scheduler dono ko ek sath background me live karne ki command
-CMD ["sh", "-c", "node server.js & node scheduler.js"]
+# 🔥 Server startup command (server.js automatically imports utils/scheduler.js)
+CMD ["node", "server.js"]

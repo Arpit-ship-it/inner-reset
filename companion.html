@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Affirmation Initiative - Companion Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); }
+        .inner-glass { background: rgba(255, 255, 255, 0.75); border: 1px solid rgba(255, 255, 255, 0.4); }
+        
+        /* 📱 CHAT CANVAS GRID INFRASTRUCTURE */
+        .chat-grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(45, 38, 59, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(45, 38, 59, 0.04) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* POPUP TRANSITION PROPERTIES */
+        .scroll-bubble {
+            opacity: 0;
+            transform: translateY(15px) scale(0.97);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scroll-bubble.bubble-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-[#FBC4B6] via-[#E2D2ED] to-[#CCD2FA] text-[#2D263B] selection:bg-[#E2D2ED] antialiased overflow-x-hidden">
+
+    <!-- 🌐 SECTION 1: PLATFORM NAVBAR -->
+    <header class="max-w-7xl mx-auto px-4 pt-4 sticky top-0 z-50">
+        <div class="w-full bg-white/80 backdrop-blur-xl rounded-full px-6 py-3.5 flex justify-between items-center shadow-lg border border-white/40">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-r from-[#FBC4B6] to-[#CCD2FA] flex items-center justify-center font-bold text-white text-xs border border-white/50">🌊</div>
+                <div>
+                    <h2 class="text-sm font-extrabold tracking-tight uppercase leading-none text-[#2D263B]">Shaifaly Sangal</h2>
+                    <span class="text-[10px] opacity-70 font-medium">Life Coach • Healer • POSH</span>
+                </div>
+            </div>
+            <nav class="hidden lg:flex space-x-7 font-semibold text-xs tracking-wider uppercase text-[#2D263B]/80">
+                <a href="index.html" class="hover:text-[#2D263B] transition">🏠 Home</a>
+                <a href="#simulator" class="hover:text-[#2D263B] transition">✨ Routine Simulator</a>
+                <a href="#vault" class="hover:text-[#2D263B] transition">📊 Affirmation Matrix</a>
+                <a href="#onboarding" class="hover:text-[#2D263B] transition">⚙️ Companion Setup</a>
+                <a href="#promise" class="hover:text-[#2D263B] transition">🤝 Our Promise</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="openRegistrationModal()" class="bg-[#2D263B] text-white text-xs px-5 py-2.5 rounded-full font-bold tracking-wider uppercase hover:scale-[1.02] transition shadow-md">
+                    🚀 Start Free Trial
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 🚀 SECTION 2: HERO ACTION CONNECTOR MESH -->
+    <main class="max-w-7xl mx-auto px-4 pt-16 pb-12 text-center lg:text-left">
+        <div class="max-w-3xl space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-white/60 px-4 py-1.5 rounded-full border border-white/60 shadow-sm text-xs font-semibold tracking-wide text-[#2D263B]">
+                <span>✨ Mindset Companion Portal</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.15] text-[#2D263B]">
+                Where personal <br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-[#e3856d] to-[#7f5fa3] bg-clip-text text-transparent">transformation</span> begins.
+            </h1>
+            <p class="text-base sm:text-lg text-[#2D263B]/80 max-w-xl leading-relaxed mx-auto lg:mx-0 font-medium">
+                Meet your personal safety portal. Get customized therapeutic responses, targeted emotional state metrics, and daily mindfulness tracking deployed instantly to your WhatsApp.
+            </p>
+            <div class="pt-4 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 max-w-md mx-auto lg:mx-0">
+                <div class="relative w-full">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold opacity-60">+91</span>
+                    <input id="heroPhoneInput" type="tel" placeholder="Enter WhatsApp Number" class="w-full pl-12 pr-4 py-3.5 rounded-full text-sm bg-white border border-white shadow-md focus:outline-none focus:ring-2 focus:ring-[#E2D2ED] font-semibold text-[#2D263B]" />
+                </div>
+                <button id="heroVerifyBtn" onclick="handleHeroVerifyAndStart()" class="bg-[#2D263B] text-white text-xs px-6 py-3.5 rounded-full font-bold tracking-wider uppercase shadow-lg hover:bg-opacity-90 transition whitespace-nowrap">
+                    Verify & Start
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 📱 SECTION 3: INTERACTIVE PLATFORM ROUTINE SIMULATOR -->
+    <section id="simulator" class="max-w-3xl mx-auto px-4 py-12">
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase font-extrabold tracking-widest bg-[#2D263B] text-white px-4 py-1 rounded-full">Interactive Session Simulator</span>
+        </div>
+
+        <div class="glass-card rounded-[3rem] p-4 sm:p-8 shadow-2xl chat-grid-bg relative border border-white/60 flex flex-col justify-between min-h-[460px] overflow-hidden">
+            
+            <div id="interaction-stage-canvas" class="w-full flex-1 flex flex-col justify-start space-y-4">
+                
+                <!-- 🌅 MORNING VIEWPORT -->
+                <div id="morning-viewport-node" class="space-y-4 w-full animate-[fadeIn_0.2s_ease-out]">
+                    <div class="flex items-center justify-between border-b border-[#2D263B]/10 pb-1.5 mb-1">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#2D263B]/60">Morning Moment Module</span>
+                        <span class="text-[10px] font-extrabold bg-[#2D263B]/10 px-2 py-0.5 rounded">Day 1</span>
+                    </div>
+                    <div class="scroll-bubble flex flex-col items-start max-w-[85%] bubble-visible">
+                        <span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span>
+                        <div class="bg-white text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium leading-relaxed">
+                            Good Morning 🌸<br>Before the world asks anything from you today, what would you like to choose for yourself? 💖
+                        </div>
+                    </div>
+                    <div class="scroll-bubble flex flex-col items-start w-full bubble-visible">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full max-w-xl mt-1">
+                            <button onclick="executeMorningPipeline('Peace')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Peace</button>
+                            <button onclick="executeMorningPipeline('Happiness')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Happiness</button>
+                            <button onclick="executeMorningPipeline('Confidence')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Confidence</button>
+                            <button onclick="executeMorningPipeline('Surprise')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Surprise</button>
+                        </div>
+                    </div>
+                    <div id="m-user-bubble" class="hidden flex flex-col items-end max-w-[85%] ml-auto"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 mr-2">You</span><div id="m-user-text" class="bg-[#2563EB] text-white rounded-2xl rounded-br-none p-4 shadow-md text-sm font-semibold">Selected Option</div></div>
+                    <div id="m-bot-bubble" class="hidden flex flex-col items-start max-w-[85%]"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span><div id="m-bot-text" class="bg-white/90 text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium italic leading-relaxed">Quote Line</div></div>
+                </div>
+
+                <!-- <ctrl42>´©Å AFTERNOON VIEWPORT -->
+                <div id="afternoon-viewport-node" class="space-y-4 w-full hidden animate-[fadeIn_0.2s_ease-out]">
+                    <div class="flex items-center justify-between border-b border-[#2D263B]/10 pb-1.5 mb-1">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#2D263B]/60">Afternoon Reset Module</span>
+                        <span class="text-[10px] font-extrabold bg-[#2D263B]/10 px-2 py-0.5 rounded">Active State</span>
+                    </div>
+                    <div class="flex flex-col items-start max-w-[85%]">
+                        <span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span>
+                        <div class="bg-white text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium leading-relaxed">
+                            Good Afternoon ☀️<br>Let's take a quick emotional break. How are you feeling right now? 🧠
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-start w-full">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full max-w-xl mt-1">
+                            <button onclick="executeAfternoonPipeline('Happy')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Happy</button>
+                            <button onclick="executeAfternoonPipeline('Calm')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Calm</button>
+                            <button onclick="executeAfternoonPipeline('Anxious')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Anxious</button>
+                            <button onclick="executeAfternoonPipeline('Tired')" class="bg-white/80 hover:bg-[#2D263B] hover:text-white transition rounded-xl p-2.5 text-xs font-bold border border-white/60 text-center shadow-sm">Tired</button>
+                        </div>
+                    </div>
+                    <div id="a-user-bubble" class="hidden flex flex-col items-end max-w-[85%] ml-auto"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 mr-2">You</span><div id="a-user-text" class="bg-[#2563EB] text-white rounded-2xl rounded-br-none p-4 shadow-md text-sm font-semibold">Selected Option</div></div>
+                    <div id="a-bot-bubble" class="hidden flex flex-col items-start max-w-[85%]"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span><div id="a-bot-text" class="bg-white/90 text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium italic leading-relaxed">Quote Line</div></div>
+                </div>
+
+                <!-- 🌆 EVENING VIEWPORT -->
+                <div id="evening-viewport-node" class="space-y-4 w-full hidden animate-[fadeIn_0.2s_ease-out]">
+                    <div class="flex items-center justify-between border-b border-[#2D263B]/10 pb-1.5 mb-1">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#2D263B]/60">Evening Relaxation Module</span>
+                        <span class="text-[10px] font-extrabold bg-[#2D263B]/10 px-2 py-0.5 rounded">Deep Recovery</span>
+                    </div>
+                    <div class="flex flex-col items-start max-w-[85%]">
+                        <span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span>
+                        <div class="bg-white text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium leading-relaxed">
+                            Good Evening 🌆<br>What are you grateful for today and how was your day? Type something into your journal console below. 📝
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-start w-full">
+                        <div class="flex bg-white/90 rounded-xl px-4 py-3 border border-white shadow-sm items-center space-x-3 w-full max-w-md mt-1">
+                            <input id="eveningInteractiveField" type="text" oninput="executeEveningPipeline()" placeholder="Type something about your day here..." class="bg-transparent text-xs w-full focus:outline-none font-semibold text-[#2D263B] placeholder-[#2D263B]/40" />
+                        </div>
+                    </div>
+                    <div id="e-user-bubble" class="hidden flex flex-col items-end max-w-[85%] ml-auto"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 mr-2">You</span><div id="e-user-text" class="bg-[#2563EB] text-white rounded-2xl rounded-br-none p-4 shadow-md text-sm font-semibold">Typing Text</div></div>
+                    <div id="e-bot-bubble" class="hidden flex flex-col items-start max-w-[85%]"><span class="text-[9px] font-bold uppercase tracking-widest opacity-40 mb-1 ml-2">Companion Bot</span><div id="e-bot-text" class="bg-white/90 text-[#2D263B] rounded-2xl rounded-bl-none p-4 shadow-sm text-sm font-medium italic leading-relaxed">Quote Line</div></div>
+                </div>
+
+            </div>
+
+            <!-- 🔥 TIMELINE SWITCH TABS -->
+            <div class="pt-5 border-t border-[#2D263B]/10 flex justify-center space-x-8 text-xs font-bold mt-6">
+                <button onclick="toggleActiveTimeline('morning')" id="tab-nav-morning" class="text-[#2D263B] border-b-2 border-[#2D263B] pb-1 transition-all duration-200 opacity-100">Morning</button>
+                <button onclick="toggleActiveTimeline('afternoon')" id="tab-nav-afternoon" class="text-[#2D263B] opacity-40 hover:opacity-100 pb-1 transition-all duration-200">Afternoon</button>
+                <button onclick="toggleActiveTimeline('evening')" id="tab-nav-evening" class="text-[#2D263B] opacity-40 hover:opacity-100 pb-1 transition-all duration-200">Evening</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🛋️´©Å SECTION 4: FREE ACCESS REGISTRATION MODAL -->
+    <div id="registrationModal" class="fixed inset-0 z-50 overflow-y-auto hidden bg-[#2D263B]/30 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="w-full max-w-xl bg-gradient-to-tr from-[#FBC4B6] via-[#E2D2ED] to-[#CCD2FA] rounded-[2.5rem] p-6 sm:p-8 shadow-2xl border border-white/60 relative">
+            <div class="flex justify-between items-center border-b border-[#2D263B]/10 pb-4 mb-6">
+                <span class="text-sm font-extrabold uppercase tracking-wider text-[#2D263B]">Early Bird Access Portal</span>
+                <button onclick="closeRegistrationModal()" class="w-8 h-8 rounded-full bg-white/60 text-[#2D263B] flex items-center justify-center font-bold text-lg focus:outline-none">&times;</button>
+            </div>
+
+            <form id="paymentPortalForm" onsubmit="handleBackendCheckoutSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-wider opacity-70 block mb-1 pl-1">Your Full Name</label>
+                        <input id="formNameField" type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl text-xs bg-white/80 border border-white focus:outline-none font-semibold text-[#2D263B]" />
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-wider opacity-70 block mb-1 pl-1">Email Identification</label>
+                        <input id="formEmailField" type="email" required placeholder="name@domain.com" class="w-full px-4 py-3 rounded-xl text-xs bg-white/80 border border-white focus:outline-none font-semibold text-[#2D263B]" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+                    <div class="sm:col-span-8">
+                        <label class="text-[10px] font-bold uppercase tracking-wider opacity-70 block mb-1 pl-1">WhatsApp Activation Number</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold opacity-60">+91</span>
+                            <input id="modalPhoneField" type="tel" required placeholder="9999999999" class="w-full pl-12 pr-4 py-3 rounded-xl text-xs bg-white/80 border border-white focus:outline-none font-semibold text-[#2D263B]" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <button type="button" onclick="resendWhatsAppOtp()" class="w-full bg-white/80 text-[#2D263B] text-[11px] font-bold py-3 rounded-xl border border-white hover:bg-white transition shadow-sm">Send OTP</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[10px] font-bold text-[#2D263B] block mb-1 pl-1">6-Digit WhatsApp Security OTP</label>
+                    <input id="formOtpField" type="text" required maxlength="6" placeholder="Enter Code Sent On Bot" class="w-full px-4 py-3 rounded-xl text-xs bg-white border border-white focus:outline-none font-extrabold tracking-widest text-center text-[#2D263B]" />
+                </div>
+
+                <div class="p-4 bg-white/40 rounded-2xl border border-white/50 space-y-4">
+                    <div>
+                        <label class="text-[11px] font-extrabold text-[#2D263B] block mb-1">What would you like to call us?</label>
+                        <p class="text-[10px] opacity-70 mb-2 font-medium">Name your custom companion (e.g., Hope Buddy, Care Buddy, Luna).</p>
+                        <input id="formCompanionName" type="text" required placeholder="e.g. Care Buddy" class="w-full px-4 py-2.5 rounded-xl text-xs bg-white border border-white focus:outline-none font-semibold text-[#2D263B]" />
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-extrabold text-[#2D263B] block mb-1">What would you like to be called?</label>
+                        <p class="text-[10px] opacity-70 mb-2 font-medium">When someone truly cares about you, what name or word do they use? (e.g., Champ, Sunshine, Beta).</p>
+                        <input id="formUserAddressName" type="text" required placeholder="e.g. Sunshine" class="w-full px-4 py-2.5 rounded-xl text-xs bg-white border border-white focus:outline-none font-semibold text-[#2D263B]" />
+                    </div>
+                </div>
+
+                <button type="submit" id="submitCheckoutBtn" class="w-full mt-4 bg-[#2D263B] text-white text-xs py-3.5 rounded-full font-bold tracking-wider uppercase shadow-xl hover:bg-opacity-90 transition transform active:scale-[0.99]">
+                    Verify OTP & Activate Free Trial Access 🚀
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📊 SECTION 5: THEMATIC CONTENT MATRIX -->
+    <section id="vault" class="max-w-7xl mx-auto px-4 py-20 border-t border-white/20">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#2D263B]">Thematic Content Matrix</h2>
+            <p class="text-sm sm:text-base opacity-80 font-medium">Explore our proprietary content bank containing over 1,000 index-mapped affirmations, situational controllers, and relaxation logs across specialized modules.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-4 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2"><span class="text-xl">🌿</span><span class="text-[9px] uppercase font-bold bg-emerald-500/10 text-emerald-800 px-2 py-0.5 rounded">Module 01</span></div>
+                    <h3 class="text-lg font-bold text-[#2D263B]">Health & Wellness</h3>
+                    <p class="text-xs opacity-80 leading-relaxed font-medium">Tailored to synchronize physical state recovery. Prompts gentle care routines, physical balance, and threshold pacing filters.</p>
+                </div>
+            </div>
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-4 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2"><span class="text-xl">🤝</span><span class="text-[9px] uppercase font-bold bg-purple-500/10 text-purple-800 px-2 py-0.5 rounded">Module 02</span></div>
+                    <h3 class="text-lg font-bold text-[#2D263B]">Relationships & Bounds</h3>
+                    <p class="text-xs opacity-80 leading-relaxed font-medium">Bypasses boundary friction and relational stress. Installs healthy communication rules and interpersonal support patterns.</p>
+                </div>
+            </div>
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-4 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2"><span class="text-xl">💰</span><span class="text-[9px] uppercase font-bold bg-amber-500/10 text-amber-800 px-2 py-0.5 rounded">Module 03</span></div>
+                    <h3 class="text-lg font-bold text-[#2D263B]">Money & Resource Mindset</h3>
+                    <p class="text-xs opacity-80 leading-relaxed font-medium">Deconstructs financial scarcity anxieties. Drives logical, structured priority maps and resource optimization tracks.</p>
+                </div>
+            </div>
+            <div class="lg:col-span-6 glass-card p-6 rounded-3xl space-y-4 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2"><span class="text-xl">🎯</span><span class="text-[9px] uppercase font-bold bg-blue-500/10 text-blue-800 px-2 py-0.5 rounded">Module 04</span></div>
+                    <h3 class="text-xl font-bold text-[#2D263B]">Career Performance & Growth</h3>
+                    <p class="text-xs opacity-80 leading-relaxed font-medium mt-1">Engineered strictly for productivity scaling. Helps navigate complex organizational pressure, handle feedback architecture gracefully, and realign work tasks safely under high stress.</p>
+                </div>
+                <div class="bg-white/50 rounded-2xl p-3 border border-white/40 mt-4">
+                    <span class="text-[9px] uppercase font-extrabold tracking-wider opacity-60 block mb-1">Evening Mind Relaxation Sample</span>
+                    <p class="text-xs font-semibold italic text-[#2D263B]/90">"I switch off from work mode. I clear my mind of emails. I rest from professional duties safely tonight."</p>
+                </div>
+            </div>
+            <div class="lg:col-span-6 glass-card p-6 rounded-3xl space-y-4 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2"><span class="text-xl">☕</span><span class="text-[9px] uppercase font-bold bg-pink-500/10 text-pink-800 px-2 py-0.5 rounded">Module 05</span></div>
+                    <h3 class="text-xl font-bold text-[#2D263B]">Loneliness & Solitude Comfort</h3>
+                    <p class="text-xs opacity-80 leading-relaxed font-medium mt-1">Designed to rewrite isolation patterns. Re-establishes self-friendship comfort metrics, routine safety logs, and helps discover grounding parameters within personal safe zones.</p>
+                </div>
+                <div class="bg-white/50 rounded-2xl p-3 border border-white/40 mt-4">
+                    <span class="text-[9px] uppercase font-extrabold tracking-wider opacity-60 block mb-1">Afternoon Reset Routine</span>
+                    <p class="text-xs font-semibold italic text-[#2D263B]/90">"Take a walk outside. Notice something beautiful around you. Acknowledge your own incredible strength."</p>
+                </div>
+            </div>
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-3 shadow-md">
+                <div class="flex justify-between items-center"><span class="text-xl">🤰</span><span class="text-[9px] uppercase font-bold bg-orange-500/10 text-orange-800 px-2 py-0.5 rounded">Module 06</span></div>
+                <h3 class="text-lg font-bold text-[#2D263B]">Pregnancy Journey</h3>
+                <p class="text-xs opacity-80 leading-relaxed font-medium">Gentle body alignment guides, instinctive pacing loops, and night comfort restoration mappings built for peaceful processes.</p>
+            </div>
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-3 shadow-md">
+                <div class="flex justify-between items-center"><span class="text-xl">⚡</span><span class="text-[9px] uppercase font-bold bg-red-500/10 text-red-800 px-2 py-0.5 rounded">Module 07</span></div>
+                <h3 class="text-lg font-bold text-[#2D263B]">Low Energy & Anxiety</h3>
+                <p class="text-xs opacity-80 leading-relaxed font-medium">Bypasses high-stress filters using simple micro-habits, zero expectation morning pacing, and grounded threshold safety steps.</p>
+            </div>
+            <div class="lg:col-span-4 glass-card p-6 rounded-3xl space-y-3 shadow-md">
+                <div class="flex justify-between items-center"><span class="text-xl">🧘</span><span class="text-[9px] uppercase font-bold bg-indigo-500/10 text-indigo-800 px-2 py-0.5 rounded">Module 08</span></div>
+                <h3 class="text-lg font-bold text-[#2D263B]">Pain Body Resilience</h3>
+                <p class="text-xs opacity-80 leading-relaxed font-medium">Fosters deep breathing adaptations, discomfort patience scripts, and physical position resetting to maintain calm under tension.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⚙️ SECTION 6: THE INTERACTIVE COMPANION SETUP PIPELINE -->
+    <section id="onboarding" class="max-w-7xl mx-auto px-4 py-20 bg-white/30 backdrop-blur-md rounded-[3rem] border border-white/50 shadow-xl">
+        <div class="max-w-3xl mx-auto text-center mb-16 space-y-3">
+            <span class="text-xs uppercase font-extrabold tracking-widest bg-[#2D263B] text-white px-4 py-1 rounded-full">Interactive Companion Setup Pipeline</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-[#2D263B]">Architect Your Safe Space</h2>
+            <p class="text-sm sm:text-base opacity-80 font-medium">Take a complete deep-dive look at the 6-step deep mental configuration that builds your custom WhatsApp AI interface.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6">
+            <div class="inner-glass rounded-2xl p-6 space-y-3 shadow-sm border border-white/40">
+                <div class="flex justify-between items-center text-xs font-bold opacity-60"><span>STEP 01</span> <span class="bg-[#2D263B]/10 px-2 py-0.5 rounded text-[9px]">IDENTITY</span></div>
+                <h4 class="font-bold text-lg text-[#2D263B]">Name Your Custom Companion</h4>
+                <p class="text-xs opacity-80 leading-relaxed font-medium">Give your workspace a dedicated name to establish trust. Pick anchors like Happy Buddy, Care Buddy, Luna, Sam, or Hope.</p>
+            </div>
+            <div class="inner-glass rounded-2xl p-6 space-y-3 shadow-md border-2 border-dashed border-[#7f5fa3]/50 bg-gradient-to-br from-white/95 to-[#E2D2ED]/20">
+                <div class="flex justify-between items-center text-xs font-bold text-[#7f5fa3]"><span>STEP 02</span> <span class="bg-[#7f5fa3]/20 px-2 py-0.5 rounded text-[9px] uppercase">Signature Feature</span></div>
+                <h4 class="font-bold text-lg text-[#2D263B]">The Care Addressing Hook</h4>
+                <p class="text-xs leading-relaxed font-semibold text-[#2D263B]/90">"When someone truly cares about you, what do they usually call you?" Bridges psychological intimacy using keywords like Champ, Sunshine, or Rockstar.</p>
+            </div>
+            <div class="inner-glass rounded-2xl p-6 space-y-3 shadow-sm border border-white/40">
+                <div class="flex justify-between items-center text-xs font-bold opacity-60"><span>STEP 03</span> <span class="bg-[#2D263B]/10 px-2 py-0.5 rounded text-[9px]">TONE LAYER</span></div>
+                <h4 class="font-bold text-lg text-[#2D263B]">Select Personality Styles</h4>
+                <p class="text-xs opacity-80 leading-relaxed font-medium">Fine-tune the speaking engine style dynamically between a Compassionate Listener, Wise Mentor, or Practical Coach.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🤝 SECTION 7: OUR CORE PROMISE MESH -->
+    <section id="promise" class="max-w-4xl mx-auto px-4 py-20 text-center space-y-4">
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-[#2D263B]">Our Core Promise</h3>
+        <p class="text-xs sm:text-sm opacity-80 max-w-2xl mx-auto leading-relaxed font-medium italic">"Your digital companion will never judge you. It is engineered entirely to celebrate your progress, remind you of your innate resilience, and gently support you through life's complex challenges. Every conversation is a meaningful step toward greater emotional well-being. You are never walking this journey alone."</p>
+    </section>
+
+    <!-- 🌐 ASYNC LOGIC BLOCK -->
+    <script>
+        const BACKEND_URL = (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')
+            ? 'https://inner-reset-20-production.up.railway.app'
+            : 'http://localhost:5000';
+
+        const modal = document.getElementById('registrationModal');
+        const heroPhone = document.getElementById('heroPhoneInput');
+        const modalPhone = document.getElementById('modalPhoneField');
+
+        // 🌅 MORNING RESPONSES DICTIONARY
+        const morningVault = {
+            Peace: "'Peace is not the absence of storm, but the presence of anchor within.' May your mind remain deeply serene today.",
+            Happiness: "'Happiness is a state of active appreciation.' Let your joy be an internal blueprint that powers your day!",
+            Confidence: "'You have survived 100% of your hardest days.' Trust your inherent strength and step forward with absolute certainty!",
+            Surprise: "'When you remain open to receive, life orchestrates unexpected gifts.' May today bring an amazing silver lining!"
+        };
+        function executeMorningPipeline(choice) {
+            document.getElementById('m-user-text').innerHTML = choice;
+            document.getElementById('m-user-bubble').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('m-bot-text').innerHTML = morningVault[choice];
+                document.getElementById('m-bot-bubble').classList.remove('hidden');
+            }, 250);
+        }
+
+        // <ctrl42>´©Å AFTERNOON RESPONSES DICTIONARY
+        const afternoonVault = {
+            Happy: "Keep riding this wave! Message a close friend or colleague and spread this amazing energy today.",
+            Calm: "Steady and balanced. Roll your shoulders back softly, sit up straight, and maintain this elegant focus.",
+            Anxious: "Take three deep breaths right now. Unclench your jaw, drop your shoulders, and drink water. This is temporary.",
+            Tired: "Energy depletion is normal. Look away from screens for 60 seconds and stretch your arms overhead."
+        };
+        function executeAfternoonPipeline(choice) {
+            document.getElementById('a-user-text').innerHTML = choice;
+            document.getElementById('a-user-bubble').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('a-bot-text').innerHTML = afternoonVault[choice];
+                document.getElementById('a-bot-bubble').classList.remove('hidden');
+            }, 250);
+        }
+
+        // 🌆 EVENING TYPING CONSOLE MONITOR
+        function executeEveningPipeline() {
+            const val = document.getElementById('eveningInteractiveField').value;
+            if (val.trim().length > 0) {
+                document.getElementById('e-user-text').innerHTML = val;
+                document.getElementById('e-user-bubble').classList.remove('hidden');
+                if (!window.eveningThreadLock) {
+                    window.eveningThreadLock = true;
+                    setTimeout(() => {
+                        document.getElementById('e-bot-text').innerHTML = "'I let go of today's effort. My mind is quiet now.' Sleep safely knowing you did your absolute best today. Goodnight.";
+                        document.getElementById('e-bot-bubble').classList.remove('hidden');
+                    }, 800);
+                }
+            }
+        }
+
+        // 🎛️ TIME SLIDER ACTIVE TAB CONTROLLER
+        function toggleActiveTimeline(targetZone) {
+            document.getElementById('morning-viewport-node').classList.add('hidden');
+            document.getElementById('afternoon-viewport-node').classList.add('hidden');
+            document.getElementById('evening-viewport-node').classList.add('hidden');
+            document.getElementById(targetZone + '-viewport-node').classList.remove('hidden');
+
+            const options = ['morning', 'afternoon', 'evening'];
+            options.forEach(slot => {
+                document.getElementById('tab-nav-' + slot).className = "text-[#2D263B] opacity-40 hover:opacity-100 pb-1 transition-all duration-200";
+            });
+            document.getElementById('tab-nav-' + targetZone).className = "text-[#2D263B] border-b-2 border-[#2D263B] pb-1 transition-all duration-200 opacity-100";
+        }
+
+        // 🌐 HERO OTP TRIGGER
+        async function handleHeroVerifyAndStart() {
+            const phoneNumber = heroPhone.value.trim();
+            if (!phoneNumber || phoneNumber.length < 10) return alert("Bhai, enter a valid 10-digit number!");
+            const verifyBtn = document.getElementById('heroVerifyBtn');
+            verifyBtn.innerHTML = "Sending OTP...";
+            verifyBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/auth/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ whatsapp_number: phoneNumber })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    modalPhone.value = phoneNumber;
+                    openRegistrationModal();
+                } else { alert("Error: " + data.error); }
+            } catch (err) { alert("Backend communication failure."); }
+            finally { verifyBtn.innerHTML = "Verify & Start"; verifyBtn.disabled = false; }
+        }
+
+        async function resendWhatsAppOtp() {
+            const phoneNumber = modalPhone.value.trim();
+            if (!phoneNumber) return alert("Phone number missing!");
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/auth/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ whatsapp_number: phoneNumber })
+                });
+                const data = await res.json();
+                if(data.success) alert("Fresh OTP sent!");
+                else alert("Error: " + data.error);
+            } catch(e) { alert("Link failure."); }
+        }
+
+        // 🚀 SUBMIT CONTROL DATA PIPELINE
+        async function handleBackendCheckoutSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('formNameField').value.trim();
+            const email = document.getElementById('formEmailField').value.trim();
+            const phone = modalPhone.value.trim();
+            const otp = document.getElementById('formOtpField').value.trim();
+            const companionName = document.getElementById('formCompanionName').value.trim();
+            const userAddressName = document.getElementById('formUserAddressName').value.trim();
+            const submitBtn = document.getElementById('submitCheckoutBtn');
+
+            submitBtn.innerHTML = "Validating Access OTP...";
+            submitBtn.disabled = true;
+
+            try {
+                const verifyRes = await fetch(`${BACKEND_URL}/api/auth/verify-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ whatsapp_number: phone, otp: otp })
+                });
+                const verifyData = await verifyRes.json();
+
+                if (!verifyData.success) {
+                    alert("🚨 Code galat hai! Please check your WhatsApp bot chat screen code again.");
+                    submitBtn.innerHTML = "Verify OTP & Activate Free Trial Access 🚀";
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                submitBtn.innerHTML = "Activating Free Trial Safe Space...";
+                const registerRes = await fetch(`${BACKEND_URL}/api/auth/register-temporary`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        companionName: companionName,
+                        userAddressName: userAddressName
+                    })
+                });
+                const regData = await registerRes.json();
+
+                if (regData.success) {
+                    alert("✨ Activation Successful! Your custom companion has been deployed directly on your WhatsApp number.");
+                    closeRegistrationModal();
+                } else {
+                    alert("Bypass user provisioning container node layer error.");
+                    submitBtn.innerHTML = "Verify OTP & Activate Free Trial Access 🚀";
+                    submitBtn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Connection failed under structural routing constraints.");
+                submitBtn.innerHTML = "Verify OTP & Activate Free Trial Access 🚀";
+                submitBtn.disabled = false;
+            }
+        }
+
+        function openRegistrationModal() { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function openRegistrationModalFromHero() { if (heroPhone.value) { modalPhone.value = heroPhone.value; handleHeroVerifyAndStart(); } else { openRegistrationModal(); } }
+        function closeRegistrationModal() { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        window.onclick = function(e) { if (e.target == modal) closeRegistrationModal(); }
+    </script>
+</body>
+</html>

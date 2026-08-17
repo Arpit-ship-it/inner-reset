@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Environment files (CRITICAL: Do not push secrets to GitHub)
+.env
+.env.local
+.env.production
+frontend/.env
+frontend/.env.production
+
+# WhatsApp session cache & authentication tokens
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Production build outputs
+dist/
+frontend/dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Operating system & IDE clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

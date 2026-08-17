@@ -1,0 +1,1939 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shaifaly Sangal | Life Coach, Healer & POSH Consultant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <meta name="title" content="Shaifaly Sangal | Life Coach, Healer & POSH Consultant" />
+  <meta name="description" content="Shaifaly Sangal is a certified Life Coach, Healer, and POSH Consultant helping individuals find emotional balance and organizations ensure workplace safety." />
+  <meta name="keywords" content="Life Coach, Healer, POSH Consultant, Emotional Healing, Workplace Safety, POSH Training, Personal Growth, Leadership Coaching" />
+  <meta name="author" content="Shaifaly Sangal" />
+  <meta name="theme-color" content="#fdfbf7" />
+  <link rel="canonical" href="https://shaifalysangal.com/" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shaifalysangal.com/" />
+  <meta property="og:title" content="Shaifaly Sangal | Life Coach, Healer & POSH Consultant" />
+  <meta property="og:description" content="Helping individuals find emotional balance and organizations ensure workplace safety through coaching, healing, and POSH consulting." />
+  <meta property="og:image" content="https://shaifalysangal.com/images/1683954830807.jpeg" />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://shaifalysangal.com/" />
+  <meta property="twitter:title" content="Shaifaly Sangal | Life Coach, Healer & POSH Consultant" />
+  <meta property="twitter:description" content="Helping individuals find emotional balance and organizations ensure workplace safety through coaching, healing, and POSH consulting." />
+  <meta property="twitter:image" content="https://shaifalysangal.com/images/1683954830807.jpeg" />
+  
+  <link rel="icon" type="image/png" href="https://shaifalysangal.com/images/favicon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      /* --- PREMIUM COLOR PALETTE --- */
+      --bg-light: #fdfbf7;
+      --bg-dark: #0a0a0a;
+      
+      --aurora-1: #ff9a9e;
+      --aurora-2: #a18cd1;
+      --aurora-3: #fbc2eb;
+      --aurora-4: #8fd3f4;
+      
+      --accent-gold: #eebb54;
+      --accent-pop: #6366f1;
+      --whatsapp: #22c55e;
+      
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --text-light: #f8fafc;
+      
+      /* GLASSMORPHISM VARIABLES */
+      --glass-surface: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --glass-highlight: rgba(255, 255, 255, 0.5);
+      --glass-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
+      
+      /* DIMENSIONS */
+      --max-width: 1120px;
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      
+      /* ANIMATIONS */
+      --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --transition-fast: 0.3s var(--ease-smooth);
+    }
+
+    body.dark {
+      --bg-light: #050505;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glass-surface: rgba(20, 20, 20, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+      --aurora-1: #4c1d95;
+      --aurora-2: #be185d;
+      --aurora-3: #1e40af;
+      --aurora-4: #0f766e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.7;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* --- BACKGROUND FX --- */
+    .grain-overlay {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 50; mix-blend-mode: overlay;
+    }
+
+    .aurora-container {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1; overflow: hidden;
+    }
+    .aurora-blob {
+      position: absolute; filter: blur(90px); opacity: 0.5; border-radius: 50%;
+      animation: float 12s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .blob-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: var(--aurora-1); }
+    .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--aurora-2); animation-delay: -3s; }
+    .blob-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: var(--aurora-3); animation-delay: -5s; }
+    .blob-4 { bottom: 10%; left: -10%; width: 30vw; height: 30vw; background: var(--aurora-4); animation-delay: -7s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-blob { animation: none; }
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -40px) scale(1.05); }
+    }
+
+    /* --- TYPOGRAPHY --- */
+    h1, h2, h3, h4, .brand-title { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; color: var(--text-main); }
+    .title-xl { font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.1; margin-bottom: 24px; }
+    .title { font-size: 2.5rem; line-height: 1.2; margin-bottom: 16px; }
+    
+    .highlight {
+      background: linear-gradient(120deg, #f1a03c, #ff7ab8, #6366f1);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      display: inline-block;
+    }
+    
+    .eyebrow {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+      color: var(--accent-pop); margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(99, 102, 241, 0.08); padding: 6px 14px; border-radius: 99px;
+    }
+    body.dark .eyebrow { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+
+    /* --- LAYOUT --- */
+    main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
+    .section { padding: 100px 0; }
+    .section-inner { width: 100%; max-width: 900px; margin: 0 auto; }
+    .stack-section { display: flex; flex-direction: column; align-items: center; }
+
+    /* --- GLASS PANELS & SHINE --- */
+    .hero-panel, .about-card, .lane, .hero-link-card, .small-panel, .contact-card, .testimonial-card, .faq-item, .footer-card, .avatar-card-container, .insta-poll-container {
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s var(--ease-smooth);
+      position: relative; overflow: hidden;
+    }
+    /* Liquid Shine Animation */
+    .hero-panel::after, .about-card::after, .lane::after, .hero-link-card::after, .small-panel::after, .contact-card::after, .testimonial-card::after, .btn::after, .footer-card::after, .avatar-card-container::after, .insta-poll-container::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-25deg); pointer-events: none; transition: 0s;
+    }
+    .hero-panel:hover::after, .about-card:hover::after, .lane:hover::after, .hero-link-card:hover::after, .small-panel:hover::after, .contact-card:hover::after, .testimonial-card:hover::after, .btn:hover::after, .footer-card:hover::after, .avatar-card-container:hover::after, .insta-poll-container:hover::after {
+      left: 200%; transition: 0.8s ease;
+    }
+    .hero-panel:hover, .lane:hover, .hero-link-card:hover, .footer-card:hover, .avatar-card-container:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+
+    /* --- NAVBAR --- */
+    .nav-shell { position: sticky; top: 20px; z-index: 100; padding: 0 20px; display: flex; justify-content: center; }
+    .nav {
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.6); border-radius: var(--radius-pill);
+      padding: 10px 24px; display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 1100px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.3s ease;
+    }
+    body.dark .nav { background: rgba(30,30,30, 0.85); border-color: rgba(255,255,255,0.1); }
+    
+    .brand { display: flex; align-items: center; gap: 12px; }
+    
+    .brand-logo { 
+      width: 56px; height: 56px; 
+      border-radius: 50%; 
+      overflow: hidden; 
+      background-color: #ffffff;
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+    }
+    body.dark .brand-logo {
+      background-color: #fdfbf7;
+      border: 2px solid rgba(0,0,0,0.1);
+    }
+    
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-title { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
+    .brand-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+
+    .nav-links { display: flex; gap: 6px; }
+    .nav-link {
+      padding: 10px 18px; border-radius: var(--radius-pill); text-decoration: none;
+      color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--text-main); background: rgba(0,0,0,0.05); }
+    body.dark .nav-link:hover { background: rgba(255,255,255,0.1); }
+    .nav-link.primary { background: var(--text-main); color: var(--bg-light); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    body.dark .nav-link.primary { background: #fff; color: #000; }
+
+    .theme-toggle, .nav-toggle {
+      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; background: transparent; border: 1px solid rgba(0,0,0,0.1); color: var(--text-main); transition: 0.2s;
+    }
+    body.dark .theme-toggle { border-color: rgba(255,255,255,0.2); }
+    .nav-toggle { display: none; }
+
+    /* --- BUTTONS --- */
+    .btn {
+      padding: 14px 32px; border-radius: var(--radius-pill); font-weight: 600; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; position: relative; overflow: hidden;
+      transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s var(--ease-smooth);
+      font-size: 1rem; border: 1px solid transparent; cursor: pointer;
+    }
+    .btn:hover { transform: scale(1.05) translateY(-2px); }
+    .btn:active { transform: scale(0.95); }
+    
+    .btn-primary { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); }
+    body.dark .btn-primary { background: linear-gradient(135deg, #fff, #e2e8f0); color: black; }
+    .btn-ghost { background: var(--glass-surface); border-color: var(--glass-border); color: var(--text-main); }
+    .btn-whatsapp { background: rgba(34, 197, 94, 0.1); color: #166534; border: 1px solid rgba(34, 197, 94, 0.3); }
+    body.dark .btn-whatsapp { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+
+    /* --- HERO CONFIGURATION GRID --- */
+    .hero-layout-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+      min-height: 85vh;
+      padding-top: 60px;
+    }
+    .hero-left-content { text-align: left; }
+    .hero-buttons { display: flex; gap: 24px; margin-top: 32px; }
+    
+    /* --- FIXED AVATAR CARD & SPEECH BUBBLE SYSTEMS --- */
+    .avatar-card-container {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      box-shadow: var(--glass-shadow);
+      animation: floatAnimation 6s ease-in-out infinite;
+      overflow: visible !important; /* CRITICAL FIX: Stops container from cutting off speech bubble */
+    }
+    .avatar-display-window {
+      width: 100%;
+      height: 360px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-gif { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+    .cloud-quote {
+      position: absolute;
+      top: -75px; /* CRITICAL FIX: Shifts it safely above the main layout box */
+      right: -25px;
+      background: #ffffff;
+      color: #1a2332;
+      padding: 14px 20px;
+      border-radius: 24px;
+      border-bottom-left-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(31, 38, 135, 0.15);
+      max-width: 260px;
+      z-index: 999; /* CRITICAL FIX: Guarantees it renders on top of everything else */
+      line-height: 1.45;
+      animation: cloudDrift 4s ease-in-out infinite alternate; /* CRITICAL FIX: Creates dynamic custom drifting look */
+    }
+    .cloud-quote::after {
+      content: ''; position: absolute; bottom: -8px; left: 20px;
+      border-width: 8px 8px 0 0; border-style: solid;
+      border-color: #ffffff transparent transparent transparent;
+    }
+    body.dark .cloud-quote { background: #1e293b; color: #f1f5f9; }
+    body.dark .cloud-quote::after { border-color: #1e293b transparent transparent transparent; }
+
+    @keyframes floatAnimation {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* CRITICAL FIX: New keyframe mapping designed to make the cloud wiggle smoothly */
+    @keyframes cloudDrift {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(-6px) translateX(4px); }
+    }
+
+    /* --- DYNAMIC INTERACTIVE POLL SYSTEM CSS --- */
+    .poll-section-layout { display: grid; grid-template-columns: 1fr 450px; gap: 48px; align-items: center; margin-top: 40px; }
+    .poll-question { font-size: 1.15rem; color: var(--text-main); margin-bottom: 24px; font-weight: 700; line-height: 1.4; }
+    .poll-option { position: relative; border: 2px solid var(--glass-border); border-radius: 16px; padding: 16px 20px; margin-bottom: 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; overflow: hidden; transition: all 0.2s ease; background: rgba(255,255,255,0.2); }
+    body.dark .poll-option { background: rgba(0,0,0,0.1); }
+    .progress-bar { position: absolute; left: 0; top: 0; bottom: 0; background-color: rgba(99, 102, 241, 0.08); z-index: 1; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    body.dark .progress-bar { background-color: rgba(99, 102, 241, 0.15); }
+    .option-text { position: relative; z-index: 2; font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
+    .option-percent { position: relative; z-index: 2; font-size: 0.95rem; font-weight: 700; color: var(--text-main); display: none; }
+    
+    .insta-poll-container.voted .poll-option { pointer-events: none; }
+    .insta-poll-container.voted .option-percent { display: block; }
+    .insta-poll-container.voted .selected-choice { border-color: var(--accent-pop); }
+    .insta-poll-container.voted .selected-choice .progress-bar { background-color: rgba(99, 102, 241, 0.18); }
+    .anon-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-light); background: var(--text-main); padding: 8px 18px; border-radius: 30px; font-weight: 600; margin-top: 16px; }
+    body.dark .anon-badge { background: #fff; color: #000; }
+
+    /* --- METRICS & STRIPS --- */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: var(--radius-pill);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; margin-bottom: 16px;
+    }
+    .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 3px rgba(34,197,94,0.3); }
+
+    .hero-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .metric { background: rgba(255,255,255,0.5); padding: 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.6); text-align: left; }
+    body.dark .metric { background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); }
+    .metric-value { font-size: 1.5rem; font-weight: 800; font-family: 'Outfit'; color: var(--text-main); }
+    .metric-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* LINKS: 3 Column Grid */
+    .hero-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .hero-link-card { padding: 14px; display: flex; align-items: center; gap: 10px; border-radius: 16px; transition: transform 0.3s; }
+    
+    .hero-link-icon { 
+      width: 56px; height: 56px; border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; 
+      flex-shrink: 0; background: #fff; overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .hero-link-icon svg { width: 28px; height: 28px; }
+    .hero-link-icon.youtube { background: #fee2e2; color: #ef4444; }
+    .hero-link-icon.linkedin { background: #dbeafe; color: #0a66c2; }
+    .hero-link-icon.topmate { background: #111827; color: #fff; }
+    body.dark .hero-link-icon.topmate { background: #fff; color: #000; }
+
+    .test-strip { display: flex; align-items: center; gap: 16px; margin-top: 24px; padding: 16px; background: rgba(255,255,255,0.4); border-radius: 16px; }
+    .avatars { display: flex; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; margin-left: -10px; background: #ddd; }
+    .avatar:first-child { margin-left: 0; }
+
+    /* --- ABOUT PILLS --- */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .pill {
+      font-size: 0.75rem; padding: 8px 16px; border-radius: var(--radius-pill);
+      background: var(--glass-surface); border: 1px solid var(--glass-border);
+      color: var(--text-main); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .pill i { color: var(--accent-pop); }
+    a.pill { text-decoration: none; transition: 0.2s; }
+    a.pill:hover { background: var(--text-main); color: var(--bg-light); border-color: var(--text-main); }
+
+    /* --- TABS & SERVICES --- */
+    .tabs { margin-top: 40px; }
+    .tab-list { display: inline-flex; background: rgba(0,0,0,0.05); padding: 6px; border-radius: var(--radius-pill); position: relative; margin-bottom: 30px; }
+    body.dark .tab-list { background: rgba(255,255,255,0.1); }
+    .tab-btn { position: relative; padding: 12px 30px; border-radius: var(--radius-pill); border: none; background: transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .tab-btn.active { background: var(--glass-surface); color: var(--text-main); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .tab-panels { width: 100%; }
+    .tab-panel { display: none; animation: fadeIn 0.4s ease; }
+    .tab-panel.active { display: block; }
+
+    .lane { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start; }
+    @media(max-width: 768px) { .lane { grid-template-columns: 1fr; } }
+    .lane-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-pop); margin-bottom: 8px; font-weight: 700; }
+    .lane-title { font-size: 1.8rem; font-weight: 700; font-family: 'Outfit'; margin-bottom: 16px; }
+    .lane-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .lane-tag { padding: 6px 12px; background: rgba(99, 102, 241, 0.05); color: var(--text-muted); border-radius: 8px; font-size: 0.85rem; border: 1px solid rgba(99, 102, 241, 0.1); display: flex; align-items: center; gap: 6px; }
+
+    /* --- GALLERY, TESTIMONIALS, POSH --- */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+    .gallery-item { 
+      height: 240px; border-radius: 24px; overflow: hidden; position: relative; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; 
+      cursor: pointer; 
+    }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+    .gallery-item:hover img { transform: scale(1.1); }
+
+    .shorts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 32px; }
+    .short-item {
+      aspect-ratio: 9/16; border-radius: 24px; overflow: hidden; position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s;
+      background: var(--glass-surface); border: 1px solid var(--glass-border);
+      cursor: pointer; display: block;
+    }
+    .short-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+    .short-item img { width: 100%; height: 100%; object-fit: cover; border: none; transition: 0.5s; }
+    .short-item:hover img { transform: scale(1.05); }
+    .short-play-icon {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 48px; height: 48px; background: rgba(255,255,255,0.3); backdrop-filter: blur(8px);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: white; border: 1px solid rgba(255,255,255,0.5); transition: 0.3s;
+    }
+    .short-item:hover .short-play-icon { background: rgba(239, 68, 68, 0.9); border-color: transparent; transform: translate(-50%, -50%) scale(1.1); }
+    @media (max-width: 900px) { .shorts-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .shorts-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+    .transformation-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; }
+    .transformation-item {
+      aspect-ratio: 16/9; border-radius: 24px; overflow: hidden; position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s;
+      background: var(--glass-surface); border: 1px solid var(--glass-border);
+      cursor: pointer; display: block;
+    }
+    .transformation-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+    .transformation-item img { width: 100%; height: 100%; object-fit: cover; border: none; transition: 0.5s; }
+    .transformation-item:hover img { transform: scale(1.05); }
+    .transformation-item:hover .short-play-icon { background: rgba(239, 68, 68, 0.9); border-color: transparent; transform: translate(-50%, -50%) scale(1.1); }
+    @media (max-width: 600px) { .transformation-grid { grid-template-columns: 1fr; } }
+
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+    .testimonial-card { font-size: 0.95rem; line-height: 1.8; }
+    .testimonial-quote { margin-bottom: 16px; font-style: italic; opacity: 0.9; }
+    .testimonial-meta { font-weight: 700; font-size: 0.85rem; color: var(--accent-pop); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .posh-list { list-style: none; margin-top: 24px; }
+    .posh-list li { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .dot { width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; margin-top: 10px; flex-shrink: 0; box-shadow: 0 0 0 4px rgba(238, 187, 84, 0.2); }
+
+    /* --- STORY & AUTHOR --- */
+    .stacked-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+    @media(max-width: 800px) { .stacked-panels { grid-template-columns: 1fr; } }
+    
+    .small-panel-title { font-weight: 700; font-family: 'Outfit'; margin-bottom: 8px; font-size: 1.1rem; }
+    .book-links { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .book-link { padding: 8px 14px; border-radius: 99px; font-size: 0.8rem; text-decoration: none; color: white; display: flex; align-items: center; gap: 6px; font-weight: 600; transition: transform 0.2s; }
+    .book-link:hover { transform: translateY(-2px); }
+    .book-link.amazon { background: #232f3e; }
+    .book-link.flipkart { background: #2874f0; }
+
+    /* --- FAQ --- */
+    .faq-column { max-width: 800px; margin: 0 auto; }
+    .faq-item { margin-bottom: 16px; padding: 0; border: 1px solid var(--glass-border); overflow: hidden; }
+    .faq-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: rgba(255,255,255,0.2); }
+    .faq-q { font-weight: 600; display: flex; align-items: center; gap: 10px; font-size: 1.05rem; }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); background: rgba(255,255,255,0.05); }
+    .faq-content { padding: 24px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .faq-toggle { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .faq-item.open .faq-body { max-height: 500px; transition: max-height 0.3s cubic-bezier(1, 0, 1, 0); }
+    .faq-item.open .faq-toggle { background: var(--text-main); color: white; border-color: transparent; }
+
+    /* --- CONTACT & CALENDAR --- */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; margin-top: 40px; align-items: start; }
+    
+    .custom-booking-widget {
+      margin-top: 32px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 24px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: left;
+    }
+    body.dark .custom-booking-widget { background: rgba(30,30,30,0.7); border-color: rgba(255,255,255,0.1); }
+    .booking-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 24px; color: var(--text-main); }
+    .booking-input { width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255, 255, 255, 0.8); font-family: inherit; font-size: 1rem; color: var(--text-main); transition: all 0.2s; }
+    body.dark .booking-input { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+    .slots-container { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; max-height: 300px; overflow-y: auto; }
+    .slot-btn { padding: 12px; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3); background: white; color: var(--accent-pop); font-weight: 500; cursor: pointer; transition: all 0.2s; text-align: center; }
+    body.dark .slot-btn { background: #1e1e2e; }
+    .slot-btn:hover { background: var(--accent-pop); color: white; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+    .phone-input-group { display: flex; gap: 12px; }
+    .country-select { width: 100px; }
+    .booking-actions { display: flex; justify-content: space-between; margin-top: 32px; }
+    .booking-summary { background: rgba(99, 102, 241, 0.05); padding: 16px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(99, 102, 241, 0.1); font-weight: 500; color: var(--accent-pop); }
+    .loader { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(99, 102, 241, 0.3); border-radius: 50%; border-top-color: var(--accent-pop); animation: spin 1s ease-in-out infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* --- UTILITIES --- */
+    .scroll-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--text-main); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; opacity: 0; transform: translateY(20px) scale(0.8); transition: all 0.4s var(--ease-elastic); z-index: 90; }
+    .scroll-top.show { opacity: 1; transform: translateY(0) scale(1); }
+    .reveal { opacity: 0; transform: translateY(60px) scale(0.95); transition: opacity 0.8s ease, transform 1s var(--ease-elastic); }
+    .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- LIGHTBOX --- */
+    .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .lightbox.active { opacity: 1; pointer-events: auto; }
+    .lightbox img { border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.3s var(--ease-elastic); max-width: 90%; max-height: 90vh; }
+    .lightbox.active img { transform: scale(1); }
+    .lightbox-close { position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 44px; height: 44px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* --- FOOTER --- */
+    .footer-card { text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+    .footer-link { color: var(--text-main); font-weight: 700; text-decoration: none; transition: 0.2s; }
+    .footer-link:hover { color: var(--accent-pop); }
+
+    /* --- PREMIUM GLASS COMPATIBLE FLOATING AFFIRMATION WIDGET CSS --- */
+    #affirmation-widget-container {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 9999;
+      font-family: inherit;
+    }
+    
+    #affirmation-trigger-btn {
+      background: linear-gradient(135deg, var(--text-main) 0%, #334155 100%);
+      color: var(--bg-light);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.3s var(--ease-elastic), background 0.3s ease;
+      animation: attentionBlink 2.5s infinite ease-in-out;
+    }
+    body.dark #affirmation-trigger-btn {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      color: #000000;
+    }
+    #affirmation-trigger-btn:hover { transform: scale(1.05) translateY(-2px); }
+
+    @keyframes attentionBlink {
+      0%, 100% {
+        /* Defaults to the specified theme layout styling rules */
+      }
+      50% {
+        background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        color: #ffffff;
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+        transform: scale(1.05);
+      }
+    }
+    
+    #affirmation-window {
+      width: 320px;
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-smooth);
+      transform-origin: bottom left;
+    }
+    
+    .affirmation-hidden {
+      display: none !important;
+      opacity: 0;
+      transform: scale(0.8) translateY(30px);
+      pointer-events: none;
+    }
+    
+    .widget-header {
+      background: rgba(99, 102, 241, 0.1);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    body.dark .widget-header { background: rgba(255,255,255,0.03); }
+    
+    .widget-header h4 {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    #close-widget-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    #close-widget-btn:hover { color: var(--text-main); }
+    
+    .widget-body { padding: 22px; text-align: center; }
+    .widget-quote { font-style: italic; color: var(--text-main); font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
+    .widget-subtext { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 18px; }
+    
+    .widget-ai-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: var(--radius-lg);
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+      transition: transform 0.2s ease;
+    }
+    .widget-ai-btn:hover { transform: scale(1.02); }
+    
+    .widget-divider { display: flex; align-items: center; text-align: center; color: var(--text-muted); font-size: 0.7rem; font-weight: 700; margin: 12px 0; }
+    .widget-divider::before, .widget-divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--glass-border); }
+    .widget-divider:not(:empty)::before { margin-right: .5em; }
+    .widget-divider:not(:empty)::after { margin-left: .5em; }
+    
+    .widget-subscribe-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--whatsapp);
+      color: white;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: var(--radius-lg);
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+      transition: transform 0.2s ease;
+    }
+    .widget-subscribe-btn:hover { transform: scale(1.02); background: #16a34a; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+      .hero-layout-grid, .poll-section-layout { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-left-content { text-align: center; }
+      .hero-buttons { justify-content: center; }
+      .gallery-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .title-xl { font-size: 2.8rem; }
+      .stacked-panels { grid-template-columns: 1fr; }
+      #affirmation-widget-container { bottom: 16px; left: 16px; }
+      #affirmation-window { width: 290px; }
+    }
+    
+    @media (max-width: 600px) {
+      .nav-shell { top: 10px; padding: 0 10px; width: 100%; }
+      .nav { padding: 8px 12px; max-width: 100%; }
+      .brand-logo { width: 42px; height: 42px; }
+      .brand-title { font-size: 1rem; }
+      .brand-sub { font-size: 0.65rem; }
+      .tab-list { display: flex; width: 100%; padding: 4px; justify-content: space-between; }
+      .tab-btn { padding: 8px 12px; font-size: 0.85rem; white-space: nowrap; }
+    }
+
+    .nav-links.mobile { display: flex; flex-direction: column; position: absolute; top: 70px; right: 20px; background: var(--glass-surface); padding: 20px; border-radius: 24px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); border: 1px solid var(--glass-border); width: 260px; opacity: 0; transform: scale(0.8) translateY(-20px); transform-origin: top right; transition: opacity 0.3s ease, transform 0.5s var(--ease-elastic); pointer-events: none; }
+    .nav-links.mobile.open { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+  </style>
+</head>
+<body>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close"><i data-lucide="x" size="24"></i></button>
+    <img src="" id="lightbox-img" alt="Full Image">
+  </div>
+
+  <div class="grain-overlay"></div>
+  <div class="aurora-container">
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+    <div class="aurora-blob blob-4"></div>
+  </div>
+
+  <div class="nav-shell">
+    <nav class="nav" id="navBar">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="https://shaifalysangal.com/images/WhatsApp_Image_2025-11-22_at_21.36.59-removebg-preview.png" alt="Shaifaly Sangal">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Shaifaly Sangal</span>
+          <span class="brand-sub">Life Coach • Healer • POSH</span>
+        </div>
+      </div>
+      
+      <div class="nav-links">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#shorts" class="nav-link">Shorts</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#testimonials" class="nav-link">Stories</a>
+        <a href="#contact" class="nav-link primary">Book a Call</a>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button class="theme-toggle" id="themeToggle"><i data-lucide="moon" size="18"></i></button>
+        <button class="nav-toggle" id="navToggle"><i data-lucide="menu" size="18"></i></button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero-layout-grid reveal" id="hero">
+      <div class="hero-left-content">
+        <div class="eyebrow">
+          <i data-lucide="sparkles" size="14"></i>
+          Helping individuals & workplaces heal and grow
+        </div>
+        
+        <h1 class="title-xl">
+          Where <span class="highlight">personal transformation</span> meets professional responsibility.
+        </h1>
+        
+        <p style="font-size: 1.25rem; max-width: 740px; margin-bottom: 32px;">
+          Life Coaching, Healing, and POSH Consulting woven together to create awareness, safety,
+          balance, and empowered decisions - for individuals and for organisations.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">
+            <i data-lucide="calendar"></i> Book a Conversation
+          </a>
+          <a href="#services" class="btn btn-ghost">
+            <i data-lucide="layout-grid"></i> Explore Services
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="avatar-card-container">
+          <div class="cloud-quote" id="dynamicCloudQuote"></div>
+          <div class="avatar-display-window">
+            <img src="" alt="Interactive Avatar" class="avatar-gif" id="dynamicAvatarImg">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal">
+      <div class="section-inner">
+        <h2 class="title" style="text-align:center">A calm, structured way to move forward.</h2>
+        <p style="text-align:center; max-width:600px; margin:0 auto 24px;">
+          People come in with overlapping questions about life, health, relationships, money and workplace safety.
+        </p>
+        
+        <div class="hero-panel" style="margin-top: 40px;">
+          <div class="status-pill">
+            <span class="status-dot"></span> Work with Shaifaly
+          </div>
+          
+          <p style="font-size:1.05rem; margin-bottom: 24px;">
+            Stuck in life or career. Emotionally exhausted. Carrying health stress, relationship pain,
+            money anxiety, or wanting safer and more compliant workplaces.
+          </p>
+
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="metric-label" style="display:flex; align-items:center; gap:8px; text-transform:uppercase; font-size:0.75rem; color:var(--text-muted); font-weight:700;">
+                <i data-lucide="message-circle" size="16"></i> Life Coaching
+              </div>
+              <div class="metric-value">400+ hours</div>
+              <div class="metric-sub">Leaders, professionals, entrepreneurs</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label" style="display:flex; align-items:center; gap:8px; text-transform:uppercase; font-size:0.75rem; color:var(--text-muted); font-weight:700;">
+                <i data-lucide="sparkles" size="16"></i> Healing
+              </div>
+              <div class="metric-value">500+ people</div>
+              <div class="metric-sub">Health, relationships, career, money</div>
+            </div>
+          </div>
+
+          <div class="hero-links">
+            <a href="https://www.youtube.com/@Shaifalyhealer" target="_blank" class="hero-link-card" style="text-decoration:none; color:inherit;">
+              <div class="hero-link-icon youtube">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 .502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase;">YouTube</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--accent-pop);">Guided Healing</div>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/shaifalysangal/" target="_blank" class="hero-link-card" style="text-decoration:none; color:inherit;">
+              <div class="hero-link-icon linkedin">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0h.003z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase;">LinkedIn</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--accent-pop);">Leadership</div>
+              </div>
+            </a>
+            <a href="https://topmate.io/shaifaly_sangal" target="_blank" class="hero-link-card" style="text-decoration:none; color:inherit;">
+              <div class="hero-link-icon topmate">
+                <svg viewBox="0 0 512 512" fill="currentColor"><path d="M256 0c141.4 0 256 114.6 256 256S397.4 512 256 512 0 397.4 0 256 114.6 0 256 0zm-70.7 217.3c-23.4 0-42.4 19-42.4 42.4 0 23.4 19 42.4 42.4 42.4h141.4c23.4 0 42.4-19 42.4-42.4 0-23.4-19-42.4-42.4-42.4H185.3zm0-84.8c-23.4 0-42.4 19-42.4 42.4 0 23.4 19 42.4 42.4 42.4h70.7c23.4 0 42.4-19 42.4-42.4 0-23.4-19-42.4-42.4-42.4h-70.7zm141.4 169.7c-23.4 0-42.4 19-42.4 42.4 0 23.4 19 42.4 42.4 42.4h-70.7c-23.4 0-42.4-19-42.4-42.4 0-23.4 19-42.4 42.4-42.4h70.7z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase;">Topmate</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--accent-pop);">1:1 Calls</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="test-strip">
+            <div class="avatars">
+              <div class="avatar" style="background:#fecaca"></div>
+              <div class="avatar" style="background:#bbf7d0"></div>
+              <div class="avatar" style="background:#bfdbfe"></div>
+            </div>
+            <div style="font-size:0.9rem; color:var(--text-muted); font-style:italic;">
+              ÔÇ£Sessions create a calm, honest space - with clarity and practical next steps.ÔÇØ
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="about">
+      <div class="section-inner">
+        <div class="about-card">
+          <div class="eyebrow"><i data-lucide="user-circle"></i> Meet Shaifaly Sangal</div>
+          <h2 class="title">A calm, compassionate approach.</h2>
+          
+          <div style="display: flex; flex-direction: column; gap: 32px; align-items: center; text-align: left;">
+            <img src="https://shaifalysangal.com/images/1683954830807.jpeg" 
+                 loading="lazy"
+                 alt="Shaifaly Sangal" 
+                 style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: var(--glass-shadow); background: var(--aurora-2);">
+
+            <div class="pill-row" style="justify-content: center; margin-bottom: 10px;">
+                <div class="pill">Life Coach</div>
+                <div class="pill">Healer</div>
+                <div class="pill">POSH Consultant</div>
+                <div class="pill">Author</div>
+            </div>
+
+            <div style="width: 100%; display: grid; grid-template-columns: 1fr; gap: 32px;">
+                <div>
+                    <h4 style="margin-bottom: 12px; color: var(--accent-pop);">Why people come here</h4>
+                    <ul class="posh-list">
+                        <li><span class="dot"></span> <span>To find stress relief, emotional healing, and inner balance</span></li>
+                        <li><span class="dot"></span> <span>To gain clarity, confidence, and direction in life or work</span></li>
+                        <li><span class="dot"></span> <span>To release emotional blocks affecting health, relationships, or career</span></li>
+                        <li><span class="dot"></span> <span>To ensure POSH compliance and create a safe, respectful workplace</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 12px; color: var(--accent-pop);">Who I work with</h4>
+                    <ul class="posh-list">
+                        <li><span class="dot"></span> <span>Individuals seeking clarity, healing, confidence, and emotional well-being</span></li>
+                        <li><span class="dot"></span> <span>Organisations committed to POSH compliance, gender sensitisation, and ethical workplace practices</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 12px; color: var(--accent-pop);">What defines my work</h4>
+                    <ul class="posh-list">
+                        <li><span class="dot"></span> <span>25+ years of professional experience</span></li>
+                        <li><span class="dot"></span> <span>A calm, practical, human-centric approach</span></li>
+                        <li><span class="dot"></span> <span>Focus on simplicity over complexity</span></li>
+                        <li><span class="dot"></span> <span>Support that is confidential, judgement-free, and result-oriented</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 12px; color: var(--accent-pop);">Experience & credentials</h4>
+                    <div class="lane-tags">
+                        <div class="lane-tag"><i data-lucide="award"></i> ICF-certified Life Coach</div>
+                        <div class="lane-tag"><i data-lucide="clock"></i> 400+ hours of coaching delivered</div>
+                        <div class="lane-tag"><i data-lucide="users"></i> 500+ individuals supported</div>
+                        <div class="lane-tag"><i data-lucide="shield"></i> External POSH Member</div>
+                        <div class="lane-tag"><i data-lucide="check-circle"></i> She-Box Registered</div>
+                        <div class="lane-tag"><i data-lucide="book-open"></i> POSH Trainer</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="services">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="layout-dashboard"></i> Signature Work</div>
+        <h2 class="title">Three ways we can work together.</h2>
+        <p style="margin-bottom:24px;">Most people arrive with overlapping questions about life, health, relationships, money, and workplace safety.</p>
+
+        <div class="tabs">
+          <div style="text-align:center;">
+            <div class="tab-list" id="tabList">
+              <button class="tab-btn active" data-tab="coaching"><i data-lucide="compass"></i> Coaching</button>
+              <button class="tab-btn" data-tab="healing"><i data-lucide="heart-handshake"></i> Healing</button>
+              <button class="tab-btn" data-tab="posh"><i data-lucide="shield-check"></i> POSH</button>
+            </div>
+          </div>
+
+          <div class="tab-panels">
+            <div class="tab-panel active" id="coaching">
+              <div class="lane">
+                <div>
+                  <div class="lane-label">Life Coaching</div>
+                  <div class="lane-title">Clarity, confidence & direction</div>
+                  <p>Structured, outcome-focused conversations that help you see clearly, decide calmly, and move towards work and life that feel aligned - without burning out.</p>
+                  <div class="lane-tags">
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Self-Discovery</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Personal Growth</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Goal Clarity</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Confidence Boost</div>
+                  </div>
+                  <a href="https://wa.link/6q82lg" class="btn btn-whatsapp" style="margin-top:24px; text-decoration:none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
+                <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" loading="lazy" style="width:100%; border-radius:20px;" alt="Coaching">
+              </div>
+            </div>
+
+            <div class="tab-panel" id="healing">
+              <div class="lane">
+                <div>
+                  <div class="lane-label">Healing & Inner Work</div>
+                  <div class="lane-title">Mind, body & emotional balance</div>
+                  <p>Short, sustainable practices that help release emotional overload and stress stored in the body, supporting health, relationships, career, and money from the inside out.</p>
+                  <div class="lane-tags">
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Emotional Release</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Stress Management</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Mind-Body Connection</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Guided Meditation</div>
+                  </div>
+                  <a href="https://wa.link/00wzvz" class="btn btn-whatsapp" style="margin-top:24px; text-decoration:none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
+                <img src="https://images.pexels.com/photos/1181605/pexels-photo-1181605.jpeg?auto=compress&cs=tinysrgb&w=800" loading="lazy" style="width:100%; border-radius:20px;" alt="Healing">
+              </div>
+            </div>
+
+            <div class="tab-panel" id="posh">
+              <div class="lane">
+                <div>
+                  <div class="lane-label">POSH Consulting</div>
+                  <div class="lane-title">Compliance, governance & safety</div>
+                  <p>POSH support that combines legal understanding with human sensitivity - helping organisations create safer, respectful workplaces that go beyond checklists.</p>
+                  <div class="lane-tags">
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Legal Compliance</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Workplace Safety</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Governance Framework</div>
+                    <div class="lane-tag"><i data-lucide="check" size="14"></i> Organizational Development</div>
+                  </div>
+                  <a href="https://wa.link/ql65no" class="btn btn-whatsapp" style="margin-top:24px; text-decoration:none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
+                <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800" loading="lazy" style="width:100%; border-radius:20px;" alt="POSH">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel" style="margin-top:32px;">
+          <div class="eyebrow"><i data-lucide="map"></i> How a typical engagement flows</div>
+          <div style="font-size:1.05rem; color:var(--text-muted); display:flex; flex-direction:column; gap:12px;">
+            <p><strong>1. A first conversation.</strong> A short call or message-based exchange to understand your current challenge.</p>
+            <p><strong>2. Choosing the path.</strong> Together, we clarify which stream serves you best right now - with clear boundaries.</p>
+            <p><strong>3. Working session by session.</strong> Sessions are paced mindfully. The focus stays on awareness and sustainable change.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="poll-pulse">
+      <div class="container section-inner">
+        <div class="poll-section-layout">
+          <div class="poll-info">
+            <div class="pill-tag pill-tag-purple"><i class="fa-solid fa-square-poll-horizontal"></i> Interactive Poll</div>
+            <h2 class="title">Take a Mental Pulse Check</h2>
+            <p>Our internal architecture shapes our choices and environment. Take a fast, anonymous moment to query yourself. Cast your choice and view where others align right now.</p>
+            <div class="anon-badge"><i data-lucide="shield-alert"></i> Completely Anonymous & Secure.</div>
+          </div>
+
+          <div class="insta-poll-container" id="lifeCoachPoll">
+            <h3 class="poll-question" id="pollQuestionText">Loading Question...</h3>
+            <div id="pollOptionsStack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="shorts">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="video"></i> YouTube Shorts</div>
+        <h2 class="title">Insights & Daily Wisdom.</h2>
+        
+        <div id="shorts-container" class="shorts-grid">
+           <p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); font-weight: 600;">Loading latest shorts...</p>
+        </div>
+        <div style="text-align: center; margin-top: 32px; display: none;" id="shorts-load-more-wrapper">
+           <button id="load-more-shorts" class="btn btn-ghost"><i data-lucide="refresh-cw"></i> Load More Shorts</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="gallery">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="image"></i> Our Gallery</div>
+        <h2 class="title">Workshops, sessions & reflection.</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.52.jpeg" loading="lazy" alt="Shaifaly Sangal POSH awareness training session"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.52 (1).jpeg" loading="lazy" alt="Shaifaly Sangal speaking at a corporate workshop"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.53 (1).jpeg" loading="lazy" alt="Audience engagement during life coaching seminar"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.53 (2).jpeg" loading="lazy" alt="Corporate training and team building session"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.53.jpeg" loading="lazy" alt="Shaifaly Sangal facilitating group healing workshop"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.54 (1).jpeg" loading="lazy" alt="Interactive leadership coaching and mentoring"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.02.54.jpeg" loading="lazy" alt="POSH compliance and workplace safety seminar"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-02 at 12.05.33.jpeg" loading="lazy" alt="Shaifaly Sangal awarding a certificate at a corporate event"></div>
+          <div class="gallery-item"><img src="https://shaifalysangal.com/images/WhatsApp Image 2026-01-07 at 15.22.58.jpeg" loading="lazy" alt="Group discussion at Shaifaly Sangal's empowerment workshop"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="testimonials">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="quote"></i> Testimonials</div>
+        <h2 class="title">What people and organisations say.</h2>
+        
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">ÔÇ£She listens without judgement and asks the kind of questions that gently move you out of confusion. I felt lighter, clearer, and more responsible for my next steps.ÔÇØ</p>
+            <p class="testimonial-meta">Senior Professional • Life Coaching</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">ÔÇ£The healing sessions helped me release years of emotional heaviness. My health, relationships, and money conversations started to feel more balanced and hopeful.ÔÇØ</p>
+            <p class="testimonial-meta">Individual Client • Healing</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">ÔÇ£Our POSH trainings became real conversations instead of checkbox sessions. The Internal Committee now feels confident, sensitive, and clear about its role.ÔÇØ</p>
+            <p class="testimonial-meta">HR Leader • POSH Consulting</p>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 48px; font-family: 'Outfit'; font-weight: 700; color: var(--text-main); font-size: 1.5rem;">People's Transformation</h3>
+        <div class="transformation-grid">
+          <a href="https://www.youtube.com/live/If08cz-jgFU" target="_blank" class="transformation-item">
+            <img src="https://img.youtube.com/vi/If08cz-jgFU/maxresdefault.jpg" loading="lazy" alt="People's Transformation">
+            <div class="short-play-icon"><i data-lucide="play" size="24" fill="currentColor"></i></div>
+          </a>
+          <a href="https://www.youtube.com/live/YKeEIq45C0s" target="_blank" class="transformation-item">
+            <img src="https://img.youtube.com/vi/YKeEIq45C0s/maxresdefault.jpg" loading="lazy" alt="People's Transformation">
+            <div class="short-play-icon"><i data-lucide="play" size="24" fill="currentColor"></i></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="posh">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="building-2"></i> For Organisations</div>
+        <h2 class="title">POSH compliance that is human, respectful and lawful.</h2>
+        <p>Organisations usually reach out when they want their POSH work to be more than a policy file - when they want structures that are compliant, consistent, and genuinely safer.</p>
+        
+        <ul class="posh-list">
+          <li><span class="dot"></span> <span>External Member services under the POSH Act, 2013.</span></li>
+          <li><span class="dot"></span> <span>POSH awareness programs that move beyond slides into real conversations.</span></li>
+          <li><span class="dot"></span> <span>ICC training and capacity-building with practical scenarios and clarity on roles.</span></li>
+          <li><span class="dot"></span> <span>Policy review, compliance support, and assistance with annual reporting.</span></li>
+        </ul>
+
+        <div class="pill-row" style="justify-content:start;">
+          <a href="https://shebox.wcd.gov.in/empanelmentReport" target="_blank" class="pill" style="text-decoration:none;"><i data-lucide="badge-check"></i> She-Box Registered</a>
+          <div class="pill"><i data-lucide="users"></i> External Member</div>
+          <div class="pill"><i data-lucide="briefcase"></i> 25+ Years Exp</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="story">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="infinity"></i> A Connected Lens</div>
+        <h2 class="title">Why one person for coaching, healing & POSH</h2>
+        
+        <div class="hero-panel">
+            <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); text-align: center;">
+              <p style="margin-bottom: 16px;">People donÔÇÖt leave emotions at home when they come to work.<br>And organisations are ultimately made of people.</p>
+              <p style="margin-bottom: 16px;">My work brings together clarity, calm, and structure - whether the need is personal healing or professional responsibility.</p>
+              <p style="font-weight: 700; color: var(--text-main);">The intention is always the same: to create awareness, safety, balance, trust, and sustainable outcomes.</p>
+            </div>
+        </div>
+
+        <div class="stacked-panels">
+          <div class="small-panel">
+            <div class="small-panel-title">Confidentiality & Ethics</div>
+            <p style="font-size:0.9rem;">Individual coaching and healing sessions are confidential. POSH work is carried out with neutrality, independence, and legal adherence. Healing remains non-medical.</p>
+          </div>
+          
+          <div class="small-panel" style="background: linear-gradient(135deg, var(--text-main), #000); color:white;">
+            <div class="small-panel-title">Author: Expect Miracles</div>
+            <p style="font-size:0.9rem; opacity:0.8;">"Expect Miracles from Ho'oponopono" explores inner healing and responsibility. Available online.</p>
+            <div class="book-links">
+              <a href="https://www.amazon.in/dp/8197188378/ref=sr_1_1?crid=1OZKWRUCC1PRA" class="book-link amazon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                Shop on Amazon
+              </a>
+              <a href="https://dl.flipkart.com/s/gf2vkKuuuN" class="book-link flipkart">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Shop on Flipkart
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="faqs">
+      <div class="section-inner">
+        <div class="eyebrow"><i data-lucide="help-circle"></i> Clarity before you begin</div>
+        <h2 class="title">Frequently asked questions.</h2>
+        
+        <div class="faq-column">
+          <div class="faq-item">
+            <div class="faq-header">
+              <div class="faq-q"><i data-lucide="monitor"></i> Are sessions conducted online or offline?</div>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-body"><div class="faq-content">Life Coaching and Healing sessions are conducted online. POSH consulting can be online or offline depending on organisational requirements.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <div class="faq-q"><i data-lucide="heart-pulse"></i> Who can benefit from healing sessions?</div>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-body"><div class="faq-content">Individuals dealing with stress, emotional overwhelm, relationship challenges, health-related stress, career pressure, or money anxiety.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <div class="faq-q"><i data-lucide="stethoscope"></i> Is healing a medical treatment?</div>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-body"><div class="faq-content">No. Healing sessions are non-medical and do not replace professional medical or psychological care. They work alongside personal awareness and responsibility.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <div class="faq-q"><i data-lucide="map-pin"></i> Is POSH consulting offered across India?</div>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-body"><div class="faq-content">Yes. POSH consulting services - including External Member support, training, and awareness sessions - are available across India.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <div class="faq-q"><i data-lucide="lock"></i> How is confidentiality maintained?</div>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-body"><div class="faq-content">Individual sessions are private and confidential. POSH engagements follow statutory confidentiality, neutrality, and process requirements.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack-section reveal" id="contact">
+      <div class="section-inner">
+        <div class="contact-card">
+          <div class="eyebrow"><i data-lucide="message-square"></i> Contact</div>
+          <h2 class="title">We can begin with one calm conversation.</h2>
+          <p>Whether you are navigating a personal challenge, a transition in life or career, or building safer workplaces - we can explore what kind of support feels right.</p>
+
+          <div class="custom-booking-widget" id="bookingWidget">
+            <div class="booking-step" id="step1">
+              <h3 class="booking-title">Select a Date & Time</h3>
+              <div class="booking-calendar-container">
+                <input type="date" id="bookingDate" class="booking-input" onchange="fetchSlots()" required>
+              </div>
+              <div id="slotsContainer" class="slots-container">
+                <p style="grid-column: 1/-1; color: #64748b;">Please select a date to see available times.</p>
+              </div>
+            </div>
+            
+            <div class="booking-step" id="step2" style="display: none;">
+              <h3 class="booking-title">Enter Details</h3>
+              <div class="booking-summary" id="bookingSummary"></div>
+              <form id="bookingForm" onsubmit="submitBooking(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>First Name *</label>
+                    <input type="text" id="bf_fname" class="booking-input" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name *</label>
+                    <input type="text" id="bf_lname" class="booking-input" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email *</label>
+                  <input type="email" id="bf_email" class="booking-input" required>
+                </div>
+                <div class="form-group">
+                  <label>Your Phone Number *</label>
+                  <div class="phone-input-group">
+                    <select id="bf_country" class="booking-input country-select">
+                      <option value="+91">­ƒç«­ƒç│ +91</option>
+                      <option value="+1">­ƒç║­ƒç© +1</option>
+                      <option value="+44">­ƒç¼­ƒçº +44</option>
+                    </select>
+                    <input type="tel" id="bf_phone" class="booking-input" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Preferred services ? *</label>
+                  <select id="bf_service" class="booking-input" required>
+                    <option value="" disabled selected>Select...</option>
+                    <option value="Life Coaching">Life Coaching</option>
+                    <option value="Healing & Inner Work">Healing & Inner Work</option>
+                    <option value="POSH Consulting">POSH Consulting</option>
+                  </select>
+                </div>
+                <div class="booking-actions">
+                  <button type="button" class="btn btn-outline" style="border:1px solid #cbd5e1; color:#475569; background:transparent; border-radius:100px; padding:12px 24px; cursor:pointer; font-weight:600;" onclick="goBackToSlots()">Back</button>
+                  <button type="submit" class="btn btn-primary" id="btnSubmitBooking" style="background:var(--primary); color: #ffffff; border:none; border-radius:100px; padding:12px 24px; cursor:pointer; font-weight:600; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);">Book Call</button>
+                </div>
+              </form>
+            </div>
+            
+            <div class="booking-step" id="step3" style="display: none; text-align: center; padding: 40px 0;">
+              <i data-lucide="check-circle" style="width: 64px; height: 64px; color: #10b981; margin-bottom: 24px;"></i>
+              <h3 class="booking-title" style="margin-bottom:8px;">Booking Confirmed!</h3>
+              <p>An email invitation has been sent to you and your calendar has been updated.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-inner reveal" id="footer" style="padding: 24px 0 80px;">
+      <div class="footer-card">
+        &copy; <script>document.write(new Date().getFullYear())</script> Shaifaly Sangal. All rights reserved. 
+        <span style="opacity: 0.3; margin: 0 10px;">|</span> 
+        Made by Arpit
+      </div>
+    </section>
+  </main>
+
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <div id="affirmation-widget-container">
+    <div id="affirmation-window" class="affirmation-hidden">
+      <div class="widget-header">
+        <h4><i data-lucide="sparkles" size="14" style="color: var(--accent-pop);"></i> Affirmation Pocket</h4>
+        <button id="close-widget-btn" aria-label="Close panel">&times;</button>
+      </div>
+      <div class="widget-body">
+        <p class="widget-quote" id="widgetInternalQuote">"Your energy introduces you before you even speak. Make it vibrant this morning."</p>
+        <p class="widget-subtext">Automated premium focus tuning directly to your phone slot daily.</p>
+        
+        <a href="/ai/" target="_blank" class="widget-ai-btn" id="widgetAiLink">
+          <i data-lucide="bot" size="16"></i> Try our latest AI
+        </a>
+        
+        <div class="widget-divider"><span>OR</span></div>
+        
+        <a href="https://wa.me/YOUR_BOT_NUMBER?text=Start%20Affirmations" target="_blank" class="widget-subscribe-btn">
+          <i data-lucide="message-circle" size="16"></i> Subscribe via WhatsApp
+        </a>
+      </div>
+    </div>
+    <button id="affirmation-trigger-btn" type="button" onclick="window.location.href='companion.html'" aria-label="Subscribe for Affirmations">
+      <i data-lucide="sparkles"></i> <span>Subscribe for Affirmations</span>
+    </button>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        const isMobile = navLinks.classList.contains('mobile');
+        if (!isMobile) navLinks.classList.add('mobile');
+        requestAnimationFrame(() => { navLinks.classList.toggle('open'); });
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+      });
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      lucide.createIcons();
+    });
+
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    const revealEls = document.querySelectorAll('.reveal');
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > 300) scrollBtn.classList.add('show'); else scrollBtn.classList.remove('show');
+      const trigger = window.innerHeight * 0.85;
+      revealEls.forEach(el => {
+        if(el.getBoundingClientRect().top < trigger) el.classList.add('active');
+      });
+    });
+
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    
+    window.addEventListener('load', () => {
+      revealEls.forEach(el => {
+        if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
+      });
+    });
+
+    const tabList = document.getElementById('tabList');
+    if(tabList) {
+      const btns = tabList.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.tab-panel');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+      });
+    }
+
+    document.querySelectorAll('.faq-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.parentElement;
+        document.querySelectorAll('.faq-item').forEach(other => { if(other !== item) other.classList.remove('open'); });
+        item.classList.toggle('open');
+        header.querySelector('.faq-toggle').textContent = item.classList.contains('open') ? 'ÔÇô' : '+';
+      });
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+
+    galleryItems.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      setTimeout(() => { lightboxImg.src = ''; }, 300);
+    }
+    if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if(lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    // YouTube Shorts Fetching Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const API_KEY = 'AIzaSyCGTXdx6DsDk4QGf6MDkFMEpU6ktg3q9wE';
+      const CHANNEL_HANDLE = 'Shaifalyhealer';
+      const SHORTS_CONTAINER = document.getElementById('shorts-container');
+      const LOAD_MORE_BTN = document.getElementById('load-more-shorts');
+      const LOAD_MORE_WRAPPER = document.getElementById('shorts-load-more-wrapper');
+      
+      let allShorts = [];
+      let currentDisplayCount = 8;
+      let uploadsPlaylistId = null;
+      let nextPageToken = null;
+      let isFetching = false;
+
+      function parseDurationToSeconds(duration) {
+         const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+         const hours = (parseInt(match && match[1] ? match[1] : 0) || 0);
+         const minutes = (parseInt(match && match[2] ? match[2] : 0) || 0);
+         const seconds = (parseInt(match && match[3] ? match[3] : 0) || 0);
+         return hours * 3600 + minutes * 60 + seconds;
+      }
+
+      function renderShorts() {
+         let htmlContent = '';
+         const shortsToShow = allShorts.slice(0, currentDisplayCount);
+         
+         shortsToShow.forEach(video => {
+             const videoId = video.id;
+             const title = video.snippet.title;
+             const thumbnails = video.snippet.thumbnails;
+             const thumbUrl = thumbnails.maxres ? thumbnails.maxres.url : (thumbnails.high ? thumbnails.high.url : thumbnails.medium.url);
+             
+             htmlContent += `
+               <a href="https://www.youtube.com/shorts/${videoId}" target="_blank" class="short-item" data-video-id="${videoId}">
+                 <img src="${thumbUrl}" loading="lazy" alt="${title}">
+                 <div class="short-play-icon">
+                    <i data-lucide="play" size="24" fill="currentColor"></i>
+                 </div>
+               </a>
+             `;
+         });
+         
+         if (shortsToShow.length > 0) {
+            SHORTS_CONTAINER.innerHTML = htmlContent;
+         }
+         if (window.lucide) window.lucide.createIcons();
+
+         if (allShorts.length > currentDisplayCount || nextPageToken) {
+             LOAD_MORE_WRAPPER.style.display = 'block';
+             LOAD_MORE_BTN.innerHTML = `<i data-lucide="refresh-cw"></i> Load More Shorts`;
+             if (window.lucide) window.lucide.createIcons();
+         } else {
+             LOAD_MORE_WRAPPER.style.display = 'none';
+         }
+      }
+
+      async function fetchYouTubeShorts(pageToken = '') {
+        if (isFetching) return;
+        isFetching = true;
+
+        try {
+          if (!uploadsPlaylistId) {
+            const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle=@${CHANNEL_HANDLE}&key=${API_KEY}`);
+            const channelData = await channelRes.json();
+            if (!channelData.items || channelData.items.length === 0) throw new Error("Channel not found.");
+            uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+          }
+
+          const pageTokenParam = pageToken ? `&pageToken=${pageToken}` : '';
+          const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=50${pageTokenParam}&key=${API_KEY}`);
+          const playlistData = await playlistRes.json();
+          
+          nextPageToken = playlistData.nextPageToken || null;
+
+          if (playlistData.items && playlistData.items.length > 0) {
+            const videoIds = playlistData.items.map(item => item.snippet.resourceId.videoId).join(',');
+            const videosRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${API_KEY}`);
+            const videosData = await videosRes.json();
+            
+            const newShorts = videosData.items.filter(video => parseDurationToSeconds(video.contentDetails.duration) <= 90);
+            allShorts = [...allShorts, ...newShorts];
+          }
+
+          isFetching = false;
+
+          if (allShorts.length < currentDisplayCount && nextPageToken) {
+              await fetchYouTubeShorts(nextPageToken);
+          } else {
+              if (allShorts.length === 0) {
+                 SHORTS_CONTAINER.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No shorts found.</p>';
+              } else {
+                 renderShorts();
+              }
+          }
+        } catch (error) {
+          console.error("Error fetching YouTube shorts:", error);
+          isFetching = false;
+          if (allShorts.length === 0) {
+            SHORTS_CONTAINER.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">Could not load latest shorts. Check console for details.</p>';
+          }
+        }
+      }
+
+      if(LOAD_MORE_BTN) {
+        LOAD_MORE_BTN.addEventListener('click', async () => {
+           currentDisplayCount += 8;
+           if (allShorts.length < currentDisplayCount && nextPageToken) {
+               LOAD_MORE_BTN.innerHTML = `<i data-lucide="loader"></i> Fetching...`;
+               if (window.lucide) window.lucide.createIcons();
+               await fetchYouTubeShorts(nextPageToken);
+           } else {
+               renderShorts();
+           }
+        });
+      }
+
+      fetchYouTubeShorts();
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dateInput = document.getElementById("bookingDate");
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+      }
+    });
+
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdFu84aQK_IP4B-ZlUGFG3nJ72RHTpnCnEgSgs1RR1R6tfeqUVkSEQhgV6iZJIvKXN/exec"; 
+    let selectedSlot = null;
+
+    async function fetchSlots() {
+      const date = document.getElementById("bookingDate").value;
+      const container = document.getElementById("slotsContainer");
+      if (!date) return;
+
+      const selectedDateObj = new Date(date);
+      if (selectedDateObj.getDay() === 0) {
+        container.innerHTML = '<p style="grid-column: 1/-1; color: #ef4444; font-weight: 500;">Sundays are off. Please select a different day.</p>';
+        return;
+      }
+      
+      container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 20px;"><div class="loader"></div><p style="margin-top:10px; color:#64748b;">Finding available times...</p></div>';
+
+      try {
+        const res = await fetch(`${APPS_SCRIPT_URL}?date=${date}`);
+        const data = await res.json();
+        
+        if (data.slots && data.slots.length > 0) {
+          container.innerHTML = '';
+          data.slots.forEach(slot => {
+            const btn = document.createElement('button');
+            btn.className = 'slot-btn';
+            btn.innerText = slot.displayTime;
+            btn.onclick = () => selectSlot(slot);
+            container.appendChild(btn);
+          });
+        } else {
+          container.innerHTML = '<p style="grid-column: 1/-1; color: #64748b;">No available slots on this date. Please select another day.</p>';
+        }
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p style="grid-column: 1/-1; color: #ef4444;">Failed to load slots. Please try again.</p>';
+      }
+    }
+
+    function selectSlot(slot) {
+      selectedSlot = slot;
+      const dateStr = document.getElementById("bookingDate").value;
+      document.getElementById("step1").style.display = "none";
+      document.getElementById("step2").style.display = "block";
+      document.getElementById("bookingSummary").innerText = `Booking for: ${dateStr} at ${slot.displayTime}`;
+    }
+
+    function goBackToSlots() {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step1").style.display = "block";
+    }
+
+    async function submitBooking(e) {
+      e.preventDefault();
+      const btn = document.getElementById("btnSubmitBooking");
+      const originalText = btn.innerText;
+      btn.innerHTML = '<div class="loader" style="width: 14px; height: 14px; border-width: 2px; border-top-color: white;"></div> Processing...';
+      btn.disabled = true;
+
+      const payload = {
+        date: document.getElementById("bookingDate").value,
+        startTime: selectedSlot.start,
+        endTime: selectedSlot.end,
+        firstName: document.getElementById("bf_fname").value,
+        lastName: document.getElementById("bf_lname").value,
+        email: document.getElementById("bf_email").value,
+        phone: document.getElementById("bf_country").value + " " + document.getElementById("bf_phone").value,
+        service: document.getElementById("bf_service").value
+      };
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if(data.success) {
+          document.getElementById("step2").style.display = "none";
+          document.getElementById("step3").style.display = "block";
+          if (window.lucide) window.lucide.createIcons();
+        } else {
+          alert("Booking failed: " + data.error);
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please check your connection and try again.");
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+  <script>
+    const questionPool = [
+      { q: "What is your mindÔÇÖs biggest energy drainer right now?", opt: ["Overthinking & anxiety", "Career path uncertainty", "Past emotional blocks", "Work-life imbalance"] },
+      { q: "When stress hits, what is your immediate default reaction?", opt: ["Pushing through to burnout", "Shutting down & isolating", "Distracting to avoid it", "Seeking healthy release"] },
+      { q: "What area of life is calling for your attention most today?", opt: ["Emotional healing & peace", "Career growth & focus", "Fixing relationship loops", "Financial stability"] },
+      { q: "What is the primary roadblock to your personal growth?", opt: ["Fear of failure / judgment", "Lack of clear direction", "Procrastination & low focus", "Unresolved past emotional baggage"] },
+      { q: "How often do you prioritize quiet self-reflection?", opt: ["Daily, it keeps me grounded", "Occasionally when overwhelmed", "Rarely, I don't find time", "Never, my mind stays busy"] },
+      { q: "What describes your current workplace culture best?", opt: ["Highly respectful & safe", "Stressed & high pressure", "Indifferent / lacks engagement", "Needs better POSH awareness"] },
+      { q: "What is the hardest part of maintaining corporate POSH compliance?", opt: ["Keeping training engaging", "True gender sensitization", "Handling complaints neutrally", "Breaking subtle internal biases"] },
+      { q: "How confident do you feel setting healthy personal boundaries?", opt: ["Completely confident", "I try but feel guilty", "I struggle to say no", "I rarely set boundaries"] },
+      { q: "Where does emotional exhaustion hit you the hardest?", opt: ["Physical fatigue & low energy", "Disruptive sleep patterns", "Irritability & low patience", "Loss of career motivation"] },
+      { q: "What is your main goal for your professional path this year?", opt: ["Transitioning into leadership", "Finding a meaningful pivot", "Managing work stress better", "Upskilling & building confidence"] },
+      { q: "How does your team prefer to learn about workplace safety/ethics?", opt: ["Interactive micro-case workshops", "Self-paced online modules", "Direct open forum dialogs", "Short video shorts & summaries"] },
+      { q: "What helps you restore inner balance fastest?", opt: ["Guided breathing/meditation", "Unplugging from digital screens", "Spending time out in nature", "Conversations with a mentor"] },
+      { q: "What emotional block affects your work performance the most?", opt: ["Imposter syndrome", "Fear of confrontation", "Anxiety over perfectionism", "General mental fatigue"] },
+      { q: "What is the tone of your internal self-talk most of the time?", opt: ["Encouraging & supportive", "Highly critical & demanding", "Anxious about future steps", "Neutral / task-focused"] },
+      { q: "How safe do employees feel reporting grievances in your sector?", opt: ["Completely safe & trusted", "Apprehensive about bias", "Unaware of proper channels", "Neutral / depends on case"] },
+      { q: "What prevents organizations from holding POSH compliance training?", opt: ["Viewing it as legal tick-box", "Finding scheduling time slots", "Lacking specialized trainers", "Budget allocations"] },
+      { q: "What element of a healing session matters most to you?", opt: ["Complete confidentiality", "Zero judgment space", "Practical integration steps", "Deep emotional release"] },
+      { q: "How do you handle transitions or sudden shifts in life?", opt: ["Adapt smoothly with calm", "Overthink all possibilities", "Feel paralyzed initially", "Resist it until forced"] },
+      { q: "What area of corporate culture needs immediate optimization?", opt: ["Empathy-driven leadership", "Clearer ethical guidelines", "Better gender sensitization", "Burnout prevention systems"] },
+      { q: "What word describes your current emotional state today?", opt: ["Seeking peaceful alignment", "Motivated but tired", "Stuck in a repetitive loop", "Calm, ready for growth"] }
+    ];
+
+    let activeSelectedQuestion = null;
+    let baselineSimulatedVotes = [];
+
+    function initializeRandomPoll() {
+      const randomIndex = Math.floor(Math.random() * questionPool.length);
+      activeSelectedQuestion = questionPool[randomIndex];
+
+      baselineSimulatedVotes = [
+        Math.floor(Math.random() * 120) + 80,
+        Math.floor(Math.random() * 80) + 40,
+        Math.floor(Math.random() * 90) + 50,
+        Math.floor(Math.random() * 60) + 30
+      ];
+
+      document.getElementById('pollQuestionText').innerText = activeSelectedQuestion.q;
+      const optionsStack = document.getElementById('pollOptionsStack');
+      optionsStack.innerHTML = '';
+
+      activeSelectedQuestion.opt.forEach((optionText, idx) => {
+        const optionMarkup = `
+          <div class="poll-option" onclick="handleUserVote(${idx})">
+            <div class="progress-bar" id="bar-${idx}"></div>
+            <span class="option-text">${optionText}</span>
+            <span class="option-percent" id="percent-${idx}">0%</span>
+          </div>
+        `;
+        optionsStack.innerHTML += optionMarkup;
+      });
+    }
+
+    function handleUserVote(selectedOptionIndex) {
+      const container = document.getElementById('lifeCoachPoll');
+      if (container.classList.contains('voted')) return;
+
+      baselineSimulatedVotes[selectedOptionIndex] += 1;
+      const totalVotes = baselineSimulatedVotes.reduce((a, b) => a + b, 0);
+      const optionsElements = container.querySelectorAll('.poll-option');
+      
+      container.classList.add('voted');
+      optionsElements[selectedOptionIndex].classList.add('selected-choice');
+
+      baselineSimulatedVotes.forEach((voteCount, index) => {
+        const calculatePercent = Math.round((voteCount / totalVotes) * 100);
+        const bar = document.getElementById(`bar-${index}`);
+        const textLabel = document.getElementById(`percent-${index}`);
+        
+        textLabel.innerText = `${calculatePercent}%`;
+        bar.style.width = `${calculatePercent}%`;
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initializeRandomPoll();
+
+      const avatarRotationConfig = [
+        { src: "images/gemini_generate_d_video_5eabc4a9(1).gif", quote: `"Take one slow, deep breath. Your nervous system thanks you every time you pause." ☁️` },
+        { src: "images/VID-20260629-WA0013(1).gif", quote: `"Inhale calm. Exhale everything you no longer need." 🧘‍♀️` },
+        { src: "images/VID-20260630-WA0012(1).gif", quote: `"Before reacting, take three conscious breaths. Clarity follows calm." 🌅` },
+        { src: "images/VID-20260630-WA0016(1).gif", quote: `Place your hand on your heart and say, "Thank you for carrying me through today." ❤️` },
+        { src: "images/VID-20260629-WA0012(1).gif", quote: `"Your body listens to every word you speak. Choose kindness." ✨` },
+        { src: "images/VID-20260629-WA0015(1).gif", quote: `"Relax your shoulders. You're carrying less than your mind believes." 🌿` },
+        { src: "images/VID-20260630-WA0011(1)(1).gif", quote: `"Notice one beautiful thing around you. Gratitude begins with awareness." 🍁` },
+        { src: "images/VID-20260630-WA0015(1).gif", quote: `"One grateful thought can transform an entire day." 🦋` },
+        { src: "images/gemini_generate_d_video_5080d565(1).gif", quote: `"Pause. Appreciate this moment before rushing to the next." ☕` },
+        { src: "images/VID-20260629-WA0014(1).gif", quote: `"Speak to yourself with the same kindness you offer others." 🪷` },
+        { src: "images/VID-20260629-WA0016(1).gif", quote: `"You deserve your own compassion today." 🌊` },
+        { src: "images/VID-20260629-WA0017(1).gif", quote: `"Progress matters more than perfection." 🚶‍♀️` },
+        { src: "images/VID-20260630-WA0017(1).gif", quote: `"Every emotion has something to teach. Listen before you judge." 🌳` },
+        { src: "images/VID-20260630-WA0013(1).gif", quote: `"Not every thought deserves your attention." 🌧️` },
+        { src: "images/VID-20260630-WA0009(1).gif", quote: `"Difficult moments don't last forever. Neither do difficult emotions." 🌙` },
+        { src: "images/VID-20260630-WA0014(1).gif", quote: `Repeat gently: "I'm Sorry. Please Forgive Me. Thank You. I Love You." 🕊️` },
+        { src: "images/VID-20260630-WA0010(1).gif", quote: `"Forgiveness is one of the gentlest forms of healing." 💖` },
+        { src: "images/VID-20260629-WA0013(1).gif", quote: `"Your mind rests when your attention returns to the present." 🧘‍♂️` },
+        { src: "images/VID-20260629-WA0017(1).gif", quote: `"Take the next step. You don't need the entire staircase today." 🚀` },
+        { src: "images/VID-20260629-WA0012(1).gif", quote: `"Every small step creates meaningful change." 🪜` },
+        { src: "images/VID-20260630-WA0015(1).gif", quote: `"Growth often feels uncomfortable before it feels beautiful." 🦋` },
+        { src: "images/VID-20260630-WA0009(1).gif", quote: `"Before sleeping, thank yourself for making it through today." ✨` },
+        { src: "images/VID-20260629-WA0013(1).gif", quote: `"Let your breath carry today's stress away." 🌊` },
+        { src: "images/VID-20260630-WA0009(1).gif", quote: `"Release what you cannot control. Tomorrow brings new possibilities." 🌈` }
+      ];
+
+      let activeTrackingIndex = localStorage.getItem('shaifaly_avatar_screenshot_index');
+      if (activeTrackingIndex === null) {
+        activeTrackingIndex = 0;
+      } else {
+        activeTrackingIndex = (parseInt(activeTrackingIndex) + 1) % avatarRotationConfig.length;
+      }
+      localStorage.setItem('shaifaly_avatar_screenshot_index', activeTrackingIndex);
+
+      const targetQuote = avatarRotationConfig[activeTrackingIndex].quote;
+      
+      // Syncing layout elements
+      document.getElementById('dynamicAvatarImg').src = avatarRotationConfig[activeTrackingIndex].src;
+      document.getElementById('dynamicCloudQuote').innerHTML = targetQuote;
+      
+      // Programmatic synchronization matching widget values to the live active quote string
+      document.getElementById('widgetInternalQuote').innerHTML = targetQuote;
+    });
+  </script>
+
+<!-- 💳 FREE ACCESS REGISTRATION MODAL -->
+  <div id="registrationModal" class="fixed inset-0 z-50 overflow-y-auto hidden bg-[#2D263B]/30 backdrop-blur-md flex items-center justify-center p-4" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(45,38,59,0.5); backdrop-filter:blur(8px); justify-content:center; align-items:center;">
+    <div class="w-full max-w-xl bg-gradient-to-tr from-[#FBC4B6] via-[#E2D2ED] to-[#CCD2FA] rounded-[2.5rem] p-6 sm:p-8 shadow-2xl border border-white/60 relative" style="background:#fff; padding:28px; border-radius:24px; max-width:500px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="font-size:1.1rem; font-weight:800; color:#1e293b; text-transform:uppercase; margin:0;">Early Bird Access Portal ✨</h3>
+        <button type="button" onclick="closeRegistrationModal()" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+      </div>
+      <form id="paymentPortalForm" onsubmit="handleBackendCheckoutSubmit(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:#475569; display:block; margin-bottom:4px;">YOUR FULL NAME</label>
+          <input id="formNameField" type="text" required placeholder="John Doe" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #cbd5e1; font-size:0.9rem;" />
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:#475569; display:block; margin-bottom:4px;">EMAIL IDENTIFICATION</label>
+          <input id="formEmailField" type="email" required placeholder="name@domain.com" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #cbd5e1; font-size:0.9rem;" />
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:#475569; display:block; margin-bottom:4px;">WHATSAPP ACTIVATION NUMBER</label>
+          <div style="display:flex; gap:8px;">
+            <input id="modalPhoneField" type="tel" required placeholder="9999999999" style="flex:1; padding:10px 14px; border-radius:10px; border:1px solid #cbd5e1; font-size:0.9rem;" />
+            <button type="button" onclick="resendWhatsAppOtp()" style="padding:10px 16px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:10px; font-weight:700; font-size:0.8rem; cursor:pointer;">Send OTP</button>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:#475569; display:block; margin-bottom:4px;">6-DIGIT WHATSAPP SECURITY OTP</label>
+          <input id="formOtpField" type="text" required maxlength="6" placeholder="Enter Code Sent On Bot" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #cbd5e1; font-size:0.9rem; text-align:center; font-weight:800; letter-spacing:2px;" />
+        </div>
+        <button type="submit" id="submitCheckoutBtn" style="margin-top:12px; width:100%; padding:14px; background:#1e293b; color:#fff; border:none; border-radius:99px; font-weight:800; font-size:0.9rem; cursor:pointer; text-transform:uppercase;">
+          Verify OTP & Activate Free Access 🚀
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🌸 PREMIUM FLOATING AFFIRMATION WIDGET -->
+  <div id="affirmation-widget-container">
+    <div id="affirmation-window" class="affirmation-hidden">
+      <div class="widget-header">
+        <h4>✨ Daily Reset Quote</h4>
+        <button id="close-widget-btn" aria-label="Close widget">&times;</button>
+      </div>
+      <div class="widget-body">
+        <div class="widget-quote" id="widgetInternalQuote">"Inhale calm. Exhale everything you no longer need." 🧘‍♀️</div>
+        <div class="widget-subtext">Daily positive affirmation for your mental safe space.</div>
+        <button type="button" onclick="openRegistrationModal()" class="widget-subscribe-btn" style="width:100%; border:none; cursor:pointer;">
+          💬 Activate Free WhatsApp Companion
+        </button>
+      </div>
+    </div>
+    <button id="affirmation-trigger-btn" type="button" onclick="window.location.href='companion.html'" aria-label="Subscribe for Affirmations">
+      <i data-lucide="sparkles"></i> <span>Subscribe for Affirmations</span>
+    </button>
+  </div>
+
+
+  <script>
+    const BACKEND_URL = (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')
+        ? 'https://inner-reset-20-production.up.railway.app'
+        : 'http://localhost:5000';
+
+    function openRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            const nameField = document.getElementById('formNameField');
+            if (nameField) nameField.focus();
+        }
+    }
+
+    function closeRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    async function resendWhatsAppOtp() {
+        const phoneInput = document.getElementById('modalPhoneField');
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        if (!phone || phone.length < 10) return alert("Please enter a valid 10-digit WhatsApp number!");
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/auth/send-otp`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ whatsapp_number: phone })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("✅ OTP sent to your WhatsApp!");
+            } else {
+                alert("OTP error: " + (data.error || "Failed to send"));
+            }
+        } catch (e) {
+            alert("Connection error when sending OTP.");
+        }
+    }
+
+    async function handleBackendCheckoutSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('formNameField').value;
+        const email = document.getElementById('formEmailField').value;
+        const phone = document.getElementById('modalPhoneField').value;
+        const otp = document.getElementById('formOtpField').value;
+
+        const btn = document.getElementById('submitCheckoutBtn');
+        if (btn) { btn.innerText = "Verifying..."; btn.disabled = true; }
+
+        try {
+            const vRes = await fetch(`${BACKEND_URL}/api/auth/verify-otp`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ whatsapp_number: phone, otp: otp })
+            });
+            const vData = await vRes.json();
+            if (!vData.success) {
+                alert("Invalid OTP code. Please check your WhatsApp.");
+                return;
+            }
+
+            const rRes = await fetch(`${BACKEND_URL}/api/auth/register-temporary`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, companionName: 'Care Buddy', userAddressName: name })
+            });
+            const rData = await rRes.json();
+            if (rData.success) {
+                alert("🎉 Welcome to Inner Reset! Your account is activated.");
+                closeRegistrationModal();
+            } else {
+                alert("Registration error: " + (rData.error || "Failed"));
+            }
+        } catch (err) {
+            alert("Error activating free access.");
+        } finally {
+            if (btn) { btn.innerText = "Verify OTP & Activate Free Access 🚀"; btn.disabled = false; }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const affTriggerBtn = document.getElementById('affirmation-trigger-btn');
+        const affWindow = document.getElementById('affirmation-window');
+        const affCloseBtn = document.getElementById('close-widget-btn');
+
+        if (affTriggerBtn) {
+            affTriggerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (affWindow) {
+                    affWindow.classList.toggle('affirmation-hidden');
+                } else {
+                    openRegistrationModal();
+                }
+            });
+        }
+
+        if (affCloseBtn && affWindow) {
+            affCloseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                affWindow.classList.add('affirmation-hidden');
+            });
+        }
+
+        // Smooth scroll for internal links
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest('a[href^="#"]');
+            if (a) {
+                const href = a.getAttribute('href');
+                if (href && href.length > 1) {
+                    const targetEl = document.getElementById(href.substring(1));
+                    if (targetEl) {
+                        e.preventDefault();
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+        });
+    });
+
+    window.openRegistrationModal = openRegistrationModal;
+    window.closeRegistrationModal = closeRegistrationModal;
+    window.resendWhatsAppOtp = resendWhatsAppOtp;
+    window.handleBackendCheckoutSubmit = handleBackendCheckoutSubmit;
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const triggerBtn = document.getElementById('affirmation-trigger-btn');
+      if (triggerBtn) {
+        triggerBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'companion.html';
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('button, a, .widget-subscribe-btn');
+        if (btn) {
+          const text = (btn.innerText || btn.textContent || '').toLowerCase();
+          if (text.includes('subscribe') || text.includes('mindset companion')) {
+            e.preventDefault();
+            window.location.href = 'companion.html';
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

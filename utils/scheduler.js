@@ -1,7 +1,10 @@
 const cron = require('node-cron');
 const User = require('../models/User');
 const UserJourney = require('../models/UserJourney');
-const { sendWAMessage } = require('../config/whatsapp');
+const waModule = process.env.NODE_ENV === 'production'
+    ? require('../config/whatsapp.production')
+    : require('../config/whatsapp');
+const { sendWAMessage } = waModule;
 const morningJourney = require('../data/morningJourney');
 
 // 📊 COMPREHENSIVE PERSONALIZED MOTIVATING QUOTE matrix

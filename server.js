@@ -2,112 +2,177 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const { connectDB, sequelize } = require('./config/db');
-// ✅ Updated import: whatsapp.js ab named exports use karta hai
-const { whatsappClient, sendWAMessage } = require('./config/whatsapp');
+const waModule = process.env.NODE_ENV === 'production'
+    ? require('./config/whatsapp.production')
+    : require('./config/whatsapp');
+const { whatsappClient, sendWAMessage } = waModule;
+
 const initializeChatbot = require('./utils/chatbot');
-// Background scheduler automation ko shuru karne ke liye
 require('./utils/scheduler');
 const authRoutes = require('./routes/auth');
-const paymentRoutes = require('./routes/payment'); // 💳 PhonePe Payment Route Import
+const paymentRoutes = require('./routes/payment');
+const chatRoutes = require('./routes/chat');
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('🚨 [Unhandled Rejection at Promise]:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('🚨 [Uncaught Exception]:', err.message || err);
+});
 
 const app = express();
 
-// ✅ CORS: origin '*' — frontend/backend seamless communicate karenge
 app.use(cors({ origin: '*', credentials: false }));
 app.use(express.json());
 
-// 🌐 Serve Static Frontend Files
 app.use(express.static('frontend'));
+app.use(express.static('.'));
 
-// ========================================================
-// 🔐 WHATSAPP OTP ROUTES (PAYMENT SE PEHLE VERIFICATION)
-// ========================================================
-let tempOtpStore = {}; // OTPs ko temporary memory me rakhne ke liye
+app.use('/api/auth', authRoutes);
 
-// 1️⃣ Route: User ke number par WhatsApp se OTP bhejna
-app.post('/api/auth/send-otp', async (req, res) => {
-    const { whatsapp_number } = req.body;
-    if (!whatsapp_number) return res.status(400).json({ error: 'WhatsApp number is required' });
-
-    // 6-digit ka secure random OTP generate karo
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    
-    // ✅ sendWAMessage internally number format handle karta hai — manual formatting ki zaroorat nahi
-
-    try {
-        // ✅ Safe wrapper use kar raha hai — client ready hone par hi bhejega
-        const sent = await sendWAMessage(
-            whatsapp_number,
-            `🔐 *Affirmation App Verification*\n\nYour security OTP code is: *${otp}*.\n\nPlease enter this code on the registration page to proceed with the payment.`
-        );
-
-        if (!sent) {
-            return res.status(503).json({ error: 'WhatsApp client abhi ready nahi hai. Thodi der baad try karo.' });
-        }
-        
-        // OTP ko memory me phone number ke sath save karlo
-        tempOtpStore[whatsapp_number] = otp;
-        
-        console.log(`✅ [OTP Sent] OTP [${otp}] successfully dispatched to ${whatsapp_number}`);
-        res.json({ success: true, message: 'OTP sent successfully on WhatsApp!' });
-    } catch (error) {
-        console.error('❌ [OTP Error] WhatsApp OTP send failed:', error.message);
-        res.status(500).json({ error: 'Failed to send OTP. Ensure your WhatsApp bot is linked and active.' });
-    }
-});
-
-// 2️⃣ Route: User ke dale hue OTP ko cross-check karna
-app.post('/api/auth/verify-otp', (req, res) => {
-    const { whatsapp_number, otp } = req.body;
-
-    if (tempOtpStore[whatsapp_number] && tempOtpStore[whatsapp_number] === otp) {
-        delete tempOtpStore[whatsapp_number];
-        console.log(`✅ [OTP Verified] Number: ${whatsapp_number} — OTP check passed successfully.`);
-        res.json({ success: true, message: 'OTP Verified successfully!' });
-    } else {
-        console.warn(`⚠️ [OTP Failed] Invalid OTP attempt for: ${whatsapp_number}`);
-        res.status(400).json({ error: 'Oops! Invalid OTP code. Please check your WhatsApp and try again.' });
-    }
-});
-// ========================================================
-
-// 🔥 CRITICAL BUG FIX: Defensive validation to prevent "argument handler must be a function" crash
-if (authRoutes && (typeof authRoutes === 'function' || typeof authRoutes.use === 'function')) {
-    app.use('/api/auth', authRoutes);
-} else {
-    console.error('\n⚠️  [Express Routing Error]: authRoutes is resolving to UNDEFINED or an Empty Object!');
-    console.error('👉 Fix: Please open your "routes/auth.js" file and ensure that the very LAST line contains: module.exports = router;\n');
-}
-
-// 💳 PHONEPE PAYMENT ROUTE MIDDLEWARE MOUNTING
 app.use('/api/payment', paymentRoutes);
+app.use('/api/chat', chatRoutes);
 
-const startServer = async () => {
-    await connectDB();
+// Health check endpoint
+app.get('/health', async (req, res) => {
     try {
-        await sequelize.sync();
-        console.log('✨ [DB Synced] All MySQL tables synced cleanly with cloud schema!');
+        const waModule = process.env.NODE_ENV === 'production'
+            ? require('./config/whatsapp.production')
+            : require('./config/whatsapp');
+        const isReady = waModule.isClientReady ? waModule.isClientReady() : false;
+        const client = waModule.whatsappClient;
         
-        // 🚀 WhatsApp Client initialize karo
-        console.log('🔄 [WhatsApp] Connecting to WhatsApp — please wait for QR or "Ready" message...');
-        whatsappClient.initialize();
-        
-        // 🤖 AI Chatbot Engine chatbot ke baad trigger karo
-        initializeChatbot(whatsappClient);
-        console.log('🤖 [Chatbot Active] AI Self-Help Chatbot Module activated and listening for messages...');
-        
+        res.status(200).json({
+            status: 'OK',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            environment: process.env.NODE_ENV || 'development',
+            database: 'Connected',
+            whatsapp: isReady ? 'Connected' : 'Disconnected',
+            whatsappNumber: client?.info?.wid?.user || 'Not authenticated'
+        });
     } catch (error) {
-        console.error('❌ [Server Start Error]:', error);
+        res.status(500).json({
+            status: 'ERROR',
+            message: error.message
+        });
     }
-};
+});
 
-startServer();
+// Browser QR Endpoint
+app.get('/qr', (req, res) => {
+    const waModule = process.env.NODE_ENV === 'production'
+        ? require('./config/whatsapp.production')
+        : require('./config/whatsapp');
+    const qrString = waModule.getLatestQR ? waModule.getLatestQR() : null;
+    const ready = waModule.isClientReady ? waModule.isClientReady() : false;
 
-app.get('/', (req, res) => {
-    res.send('Bhai, WhatsApp module, OTP verification, PhonePe API aur AI Chatbot active hai!');
+    if (ready) {
+        return res.send(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>WhatsApp Connected!</title><meta http-equiv="refresh" content="10"></head>
+            <body style="font-family:sans-serif; text-align:center; background:#f0fdf4; padding:50px;">
+                <h1 style="color:#166534;">✅ WhatsApp Client is Ready & Authenticated!</h1>
+                <p style="color:#15803d; font-size:18px;">Your AI Chatbot is live and active on WhatsApp.</p>
+                <div style="margin-top: 30px;">
+                    <a href="/reset-session" style="background:#dc2626; color:white; padding:12px 24px; text-decoration:none; border-radius:8px; font-weight:bold; display:inline-block;">
+                        🚨 Disconnect & Re-Scan QR Code
+                    </a>
+                </div>
+            </body>
+            </html>
+        `);
+    }
+
+    if (!qrString) {
+        return res.send(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>WhatsApp QR Generating...</title><meta http-equiv="refresh" content="3"></head>
+            <body style="font-family:sans-serif; text-align:center; background:#fefce8; padding:50px;">
+                <h2 style="color:#a16207;">⏳ Generating fresh WhatsApp QR code...</h2>
+                <p style="color:#854d0e;">This page will auto-refresh in 3 seconds...</p>
+            </body>
+            </html>
+        `);
+    }
+
+    const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=${encodeURIComponent(qrString)}`;
+
+    return res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Scan WhatsApp QR Code</title>
+            <meta http-equiv="refresh" content="15">
+            <style>
+                body { font-family: sans-serif; text-align: center; background: #0f172a; color: white; padding: 30px; }
+                .card { background: #1e293b; display: inline-block; padding: 30px; border-radius: 20px; }
+                img { border-radius: 12px; padding: 10px; background: white; }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <h2>📱 Scan WhatsApp QR Code</h2>
+                <img src="${qrImageUrl}" alt="WhatsApp QR Code" />
+            </div>
+        </body>
+        </html>
+    `);
+});
+
+// Reset Session Endpoint
+app.get('/reset-session', async (req, res) => {
+    try {
+        const fs = require('fs');
+        const path = require('path');
+        const waModule = process.env.NODE_ENV === 'production'
+            ? require('./config/whatsapp.production')
+            : require('./config/whatsapp');
+        const client = waModule.whatsappClient;
+
+        if (waModule.resetSessionFlags) waModule.resetSessionFlags();
+        try { if (client && client.destroy) await client.destroy(); } catch (e) {}
+
+        const authDir = path.resolve(__dirname, '.wwebjs_auth');
+        if (fs.existsSync(authDir)) fs.rmSync(authDir, { recursive: true, force: true });
+
+        setTimeout(() => {
+            if (client && client.initialize) client.initialize().catch(e => {});
+        }, 1000);
+
+        return res.send(`<h2>✅ WhatsApp Session Reset! Redirecting to /qr...</h2><script>setTimeout(()=>location.href='/qr', 3000)</script>`);
+    } catch (err) {
+        return res.status(500).send('Error: ' + err.message);
+    }
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-});
+
+async function startServer() {
+    try {
+        await connectDB();
+        await sequelize.sync({ alter: false });
+        console.log('✅ Database connected and synced');
+
+        if (whatsappClient && typeof whatsappClient.initialize === 'function') {
+            whatsappClient.initialize().catch(err => {
+                console.warn('⚠️ WhatsApp client initialization warning:', err.message);
+            });
+            initializeChatbot(whatsappClient);
+        }
+
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running on port ${PORT}`);
+        });
+    } catch (err) {
+        console.error('❌ Failed to start server:', err);
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running on port ${PORT} (without DB sync)`);
+        });
+    }
+}
+
+startServer();
